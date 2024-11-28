@@ -1,0 +1,86 @@
+@import url('https://fonts.cdnfonts.com/css/bauhaus-modern');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dosis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dosis:wght@200..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+.logo{
+  font-family: "Comfortaa", sans-serif;
+}
+::-webkit-scrollbar{
+  display: none;
+}
+*{
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  scroll-behavior: smooth;
+}
+.hq{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.hd{
+  font-family: 'Bauhaus Modern', sans-serif;
+}
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.bgColor{
+  background: linear-gradient(180deg, #000, transparent 50%), linear-gradient(90deg, #17d1c6, #336aea 19.84%, #8d639e 39.68%, #eb644c 59.52%, #ea7e11 79.36%, #44b678 99.2%), linear-gradient(0deg, transparent, #000 40%);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  opacity: .5;
+  left: 0;
+
+}
+input[type=file]{
+  display: none;
+
+}
+.no_scroll{
+  overflow: hidden;
+}
+.category div:nth-child(even) {
+  transform: rotate(10deg);
+  transition: .3s;
+  
+}
+.category div:hover:nth-child(even) {
+  transform: scale(1.1);
+  transition: .3s;
+  
+}
+.category div:hover:nth-child(odd) {
+  transform: rotate(5deg);
+  transition: .3s;
+}
+.category div:nth-child(odd) {
+  transform: rotate(-20deg);
+  transition: .3s;
+}
