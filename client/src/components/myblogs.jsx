@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
 import { useUser} from '@clerk/clerk-react'
 import empty from '/empty.png'
+
 const URLs = import.meta.env.VITE_BASEURL
 const Myblogs = () => {
+
   
   const [data, setData] = useState();
   const user_id = useUser().user.id
@@ -31,7 +33,7 @@ const Myblogs = () => {
           data && data.length > 0 && data?.map((e)=> 
           <BlogCard title={e.title} key={e._id} 
           img={e.image} date={e.postAt} id={e._id} 
-          del={delEdit}/> )
+          del={delEdit} EditContent={e}/> )
           
         }
     </div>

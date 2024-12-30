@@ -20,7 +20,7 @@ const Header = () => {
       </div>
 
       {/* menu */}
-      <div className="shadow-md md-px-5 p-2 rounded-full">
+      <div className=" md-px-5 p-2 rounded-full">
       <div className="hidden md:flex">
         <ul className='flex space-x-2'>
           <li>Home</li>
@@ -33,13 +33,13 @@ const Header = () => {
       <Menu onClick={()=> setOpen(!open)} className='cursor-pointer'/>
       {
         open &&
-      <div className="absolute left-0 top-[70px] z-20 bg-white w-full flex justify-center p-5">
+      <div className="absolute bg-white left-0 top-[70px] z-20  w-full flex justify-center p-5">
         <ul className='space-y-3'>
         <li>Home</li>
         <li>Blogs</li>
         <li>Saved</li>
         <li>My Space</li>
-      </ul>
+      </ul>``
       </div>
 
       }

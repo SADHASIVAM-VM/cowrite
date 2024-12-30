@@ -11,6 +11,7 @@ import {
 import CommentBox from '../components/comment'
 import { useParams } from 'react-router-dom'
 import loading from '../assets/loading/spinner.svg'
+import { Star, StarOff } from 'lucide-react'
 
 
 const URLs = import.meta.env.VITE_BASEURL
@@ -66,13 +67,17 @@ const formatDate =(postDate)=>{
   
      </div>
 
-       <h1 className='text-4xl'>{data.title}</h1>
-        <p className='opacity-80 my-5 mb-10 '>{data.description}</p>
+       <div className="flex items-center justify-between gap-5">
+       <h1 className='text-4xl text-wrap'>{data.title}</h1>
+       <span className='pr-5' >{
+        true?<Star fill='red' color=''/>:<Star/>}</span>
+       </div>
+        <p className='opacity-70 font-bold my-5 mb-10 '>{data.description}</p>
 
       <div className="flex flex-col md:flex-row gap-5 relative">
         <div className="md:w-3/4 order-2 md:order-1">
        
-        <div className="opacity-70" dangerouslySetInnerHTML={{__html: data.content}} >
+        <div className="opacity-70 w-full" dangerouslySetInnerHTML={{__html: data.content}} >
     
         </div>
         </div>

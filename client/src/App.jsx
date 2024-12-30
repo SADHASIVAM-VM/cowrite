@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {  createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './Layout/Layout'
 import Home from './pages/Home'
@@ -10,8 +10,11 @@ import './App.css'
 import ProtectedRoutes from './ProtectedRoutes'
 import Signin from './components/Signin'
 import { Toaster } from 'react-hot-toast'
+import { useMyContext } from './config/CommonContext'
+import Myblogs from './components/myblogs'
 const App = () => {
-
+const {theme} = useMyContext();
+console.log(theme)
   const routers = createBrowserRouter([
     {
       element:<Layout/>,

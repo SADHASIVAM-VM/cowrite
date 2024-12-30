@@ -95,7 +95,7 @@ const Comment = () => {
       {/* Add a New Comment */}
       <div className="mb-6">
         <textarea
-          className="w-full h-[120px] p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black"
+          className="w-full h-[120px] p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-transparent"
           placeholder="Write a comment..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
@@ -129,7 +129,7 @@ const Comment = () => {
               <div className="ml-12 mt-5 flex gap-4">
                 <button>
                   <span className="flex gap-2">
-                    <HeartIcon fill="red" /> {comment.likes} likes
+                    <HeartIcon fill="red" color="" /> {comment.likes} likes
                   </span>
                 </button>
                 <button onClick={() => setIsReplyBox(comment._id)}>

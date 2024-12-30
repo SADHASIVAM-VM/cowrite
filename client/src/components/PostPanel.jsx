@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ResizeModule from "@botom/quill-resize-module";
@@ -7,92 +7,72 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 import upload from "../assets/icons/upload.jpg";
 import spinners from "../assets/loading/spinner.svg";
+import { useMyContext } from "../config/CommonContext";
 
-// Register the resize module with Quill
 Quill.register("modules/resize", ResizeModule);
 
 const URLs = import.meta.env.VITE_BASEURL;
 
 function PostPanel() {
-  const ids = useAuth().userId
-  const username = useUser().user.username
-//console.log(ids)
+  const { editBlog, setEditBlog, setMenuSwitch } = useMyContext();
+
+  const ids = useAuth().userId;
+  const username = useUser().user.username;
+
   const quillRef = useRef(null);
   const [blogData, setBlogData] = useState({
-    user_id:'',
-    username:'',
+    user_id: '',
+    username: '',
     title: "",
     description: "",
     content: "",
     image: null,
   });
-  const [loading, setLoading] = useState();
-  const [fileName, setFileName] = useState();
+
+  const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState("");
   const [imgErr, setImgErr] = useState(null);
 
-  // Quill modules
-  const modules = {
-    toolbar: {
-      container: [
-        [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
-        [{ size: [] }],
-        ["bold", "italic", "underline", "strike", "blockquote"],
-        [
-          { list: "ordered" },
-          { list: "bullet" },
-          { indent: "-1" },
-          { indent: "+1" },
-        ],
-        ["link", "image", "video"],
-        ["clean"],
-        [{ align: [] }],
-      ],
-      handlers: {
-        // image: imageHandler, // Attach custom image handler
-      },
-    },
-    resize: {
-      locale: {
-        altTip: "Hold down the alt key to zoom",
-        floatLeft: "Left",
-        floatRight: "Right",
-        center: "Center",
-        restore: "Restore",
-      },
-    },
-  };
+  useEffect(() => {
+    if (editBlog) {
+      setBlogData({
+        user_id: editBlog.user_id,
+        username: editBlog.username,
+        title: editBlog.title,
+        description: editBlog.description,
+        content: editBlog.content,
+        image: null,
+      });
+      setFileName(editBlog.imageName || "");
+    }
+  }, [editBlog]);
+  console.log(editBlog)
 
-  //changeHandle
   const changeHandle = (e) => {
     const { name, value } = e.target;
     setBlogData((prev) => ({ ...prev, [name]: value }));
   };
-  // handle Image change
 
   const HandleFileChange = (e) => {
     const { name } = e.target;
     const file = e.target.files[0];
-    if(file){
-      setImgErr(false)
+    if (file) {
+      setImgErr(false);
     }
     setFileName(file.name);
     setBlogData((prev) => ({ ...prev, [name]: file }));
   };
 
   const handleQuillChange = (value) => {
-    setBlogData((prev) => ({
-      ...prev,
-      content: value,
-    }));
+    setBlogData((prev) => ({ ...prev, content: value }));
   };
 
-  // Post blog function
   const postBlog = async () => {
     setLoading(true);
     try {
       const formData = new FormData();
-      formData.append("user_id",ids);
-      formData.append("username",username);
+      formData.append("user_id", ids);
+      formData.append("username", username);
       formData.append("title", blogData.title);
       formData.append("description", blogData.description);
       formData.append("content", JSON.stringify(blogData.content));
@@ -100,132 +80,80 @@ function PostPanel() {
       if (blogData.image) {
         formData.append("image", blogData.image);
       }
-      else{
-        toast.error("Select Image")
-        setImgErr(true)
-      }
-      
 
-      const post = await fetch(`${URLs}/post`, {
-        method: "post",
-        body: formData,
+      const endpoint = editBlog ? `${URLs}/post/${editBlog._id}` : `${URLs}/post`;
+      const method = editBlog ? "PUT" : "POST";
+
+      const response = await fetch(endpoint, {
+        method : method,
+        body: formData 
       });
-
-      if (post.ok) {
+      
+      if (response.ok) {
         setLoading(false);
-        toast.success("posted");
-        setBlogData({
-          user_id:'',
-          title: "",
-          description: "",
-          content: "",
-          image: '',
-        })
-        setImgErr(null)
-        setFileName("")
+        toast.success(editBlog ? "Blog updated successfully" : "Blog created successfully");
+        setBlogData({ user_id: '', title: "", description: "", content: "", image: null });
+        setImgErr(null);
+        setFileName("");
+        setEditBlog(null);
       } else {
         setLoading(false);
-        toast.error("post un-success");
+        toast.error("Failed to save blog");
       }
     } catch (err) {
       setLoading(false);
-      console.log("RRR", err);
-      toast.error("Something wrong");
+      console.error(err);
+      toast.error("An error occurred while saving the blog");
     }
   };
+
   const onsubmitting = (e) => {
     e.preventDefault();
     postBlog();
   };
 
-  // add category
-  const optionCreate =()=>{
-
-    const cc = document.getElementById('AddLabel')
-    const ccc = document.createElement('option')
-    ccc.value = 'ddd'
-    ccc.text = `ddd` 
-    cc.add(ccc)
-    console.log("children : ",ccc)
-  }
-  
   return (
     <div className="p-2 relative">
-      <div className="">
-        <form action="" onSubmit={onsubmitting}>
-          <div className="flex gap-3 flex-col">
-            <input
-              name="title"
-              required
-              type="text"
-              placeholder="Blog Title"
-              value={blogData.title}
-              className="border-2 w-full py-4 px-5 rounded-md"
-              onChange={changeHandle}
-            />
-            <textarea
-              required
-              name="description"
-              type="text"
-              placeholder="Short Description..."
-              value={blogData.description}
-              className="border-2 w-full p-5 rounded-md "
-              onChange={changeHandle}
-            />
-          </div>
-
-          <div className="flex items-center justify-between my-5">
-            <label htmlFor="img" className={`${imgErr ==true && "border border-red-500"} ${imgErr == false && " border border-green-500" }  p-2 rounded-md`}>
-              <span className="flex items-center gap-3">
-                <img
-                  src={upload}
-                  className="w-16 rounded-md shadow-md cursor-pointer  "
-                />
-                <i>{fileName ? fileName + "✔️" : "Select Image"}</i>
-              </span>
-            </label>
-            <input             
-              id="img"
-              name="image"
-              type="file"
-              onChange={HandleFileChange}
-            />
-              <div className="flex items-center xl:flex-row flex-col justify-center">
-              <input type="text"  placeholder="Add Label" className="w-[100px] p-1 border" onClick={optionCreate}/>
-              <select name="" id="AddLabel" className="px-5 py-3" onChange={(e)=> console.log(e.target.value)}>
-                
-                <option selected disabled>Category</option>
-                <option value="Ai">AI</option>
-                <option value="Finace">Finace</option>
-              </select>
-              </div>
-
-            <button
-              type="submit"
-              className="bg-[#0e78ba] hover:bg-[#0d659b] float-right rounded-lg px-10 py-2 h-14  flex gap-2 items-center"
-            >
-              <SendHorizonal color="white" />
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div className="">
-        <ReactQuill
-          ref={quillRef}
-          theme="snow"
-          modules={modules}
-          value={blogData.content}
-          onChange={handleQuillChange}
-          className="h-[70vh]"
+      <form action="" className="space-y-2" onSubmit={onsubmitting}>
+       <div className="space-y-4 ">
+       <input
+          name="title"
+          required
+          type="text"
+          placeholder="Blog Title"
+          value={blogData.title}
+          className="border-2 w-full bg-transparent py-4 px-5 rounded-md"
+          onChange={changeHandle}
+       
         />
-      </div>
-
-      {loading && (
-        <div className="absolute top-0 flex h-full w-full justify-center items-center bg-black bg-opacity-60">
-          <img src={spinners} alt="" className="w-20" />
+        <textarea
+          required
+          name="description"
+          placeholder="Short Description..."
+          value={blogData.description}
+          className="border-2 bg-transparent w-full p-5 rounded-md"
+          onChange={changeHandle}
+        />
+       
+       </div>
+        <div className="flex justify-between gap-5 items-center">
+          <div className="">
+          <label htmlFor="img" className={imgErr ? "border border-red-500" : "border flex items-center px-2 rounded-md"}>
+          <img src={upload} className="w-16 " alt="Upload" />
+          <span className="opacity-60 ml-2">{fileName || "Select Image"}</span >
+        </label>
+        <input id="img" name="image" type="file" onChange={HandleFileChange} />
+        
+          </div>
+        <button type="submit" className="border hover:text-yellow-400 h-[50px] px-3 rounded-md">{editBlog ? "Update" : "Post"}</button>
         </div>
-      )}
+      </form>
+
+      {/* Quill */}
+      <div className="mt-3">
+      <ReactQuill className="h-[250px]" ref={quillRef} theme="snow" modules={{ toolbar: true }} value={blogData.content} onChange={handleQuillChange} />
+      </div>
+      {loading && <div className="loading-spinner"><img src={spinners} alt="" /></div>}
     </div>
   );
 }

@@ -95,23 +95,30 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id",upload.none(), async (req, res) => {
   const { id } = req.params;
-  const { user_id, title, content } = req.body;
+ const {user_id,username,title,description, content } = req.body;
+
 
   try {
     // Prepare fields to update
     const updateField = {};
     if (user_id !== undefined) updateField.user_id = user_id;
+    if (username !== undefined) updateField.username = username;
     if (title !== undefined) updateField.title = title;
+    if (description !== undefined) updateField.description = description;
     if (content !== undefined) updateField.content = content;
     // Check if there are fields to update
+    console.log(updateField)
     if (Object.keys(updateField).length === 0) {
       return res.status(400).json({ error: "No fields provided for update" });
     }
 
     // Check if the post exists
-    const postExists = await postModel.findOne({ _id: id });
+    const postExists = await postModel.findByIdAndUpdate(id ,{
+      user_id,username, title,description, content
+    });
+    console.log(postExists.id)
     if (!postExists) {
       return res.status(404).json({ error: "Post not found" });
     }
@@ -133,6 +140,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+  // console.log(id)
   try {
     const checkDelete = await postModel.findOne({ _id: id });
     if (!checkDelete) {

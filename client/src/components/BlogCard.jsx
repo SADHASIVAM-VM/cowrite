@@ -13,20 +13,21 @@ import {
     AlertDialogTrigger,
   } from "./ui/alert-dialog"
 import toast from 'react-hot-toast'
+import { useMyContext } from '../config/CommonContext'
   
 
 
 
 
 // import blog from '../assets/blogexp.webp'
-const BlogCard = ({title, img, date, id, del}) => {
+const BlogCard = ({title, img, date, id, del,EditContent}) => {
     const [delEditId, setDelEditId] = useState('');
    // console.log(img)
     const URLs = import.meta.env.VITE_BASEURL
     //console.log(URLs)
     const navigate = useNavigate()
+    const {editBlog, setEditBlog, setMenuSwitch} = useMyContext()
  
-
 
     const formatDate =(postDate)=>{
         const date = new Date(postDate);
@@ -38,7 +39,7 @@ const BlogCard = ({title, img, date, id, del}) => {
     }
 
     // delete 
-
+   console.log(delEditId);
     const handleDeleteBlog =async()=>{
        const response =  await fetch(`${URLs}/post/${delEditId}`,
         {
@@ -52,12 +53,8 @@ const BlogCard = ({title, img, date, id, del}) => {
       }
     }
     const handleEditBlog = async()=>{
-      const response =  await fetch(`${URLs}/post/${delEditId}`,
-        {
-          method:"PUT"
-        }
-      )
-
+      setEditBlog(EditContent)
+      setMenuSwitch("newpost")
     }
   return (
   
@@ -72,9 +69,9 @@ const BlogCard = ({title, img, date, id, del}) => {
 <AlertDialogTrigger><Trash2 color='red'/></AlertDialogTrigger>
 <AlertDialogContent>
 <AlertDialogHeader>
-  <AlertDialogTitle > Are you absolutely sure?</AlertDialogTitle>
+  <AlertDialogTitle > Are you sure?</AlertDialogTitle>
   <AlertDialogDescription>
-    This action cannot be undone. This will permanently delete your account
+    This action cannot be undone. This will permanently delete your Blog
     and remove your data from our servers.
   </AlertDialogDescription>
 </AlertDialogHeader>
@@ -86,7 +83,7 @@ const BlogCard = ({title, img, date, id, del}) => {
             </AlertDialog>
             </div>
 
-            <button><Edit color='blue' /></button>
+            <button onClick={()=>handleEditBlog(id)}><Edit color='blue' /></button>
         </div>
           }
 
@@ -99,6 +96,8 @@ const BlogCard = ({title, img, date, id, del}) => {
                 </p>
                 <p className='opacity-50 text-sm font-mono font-bold'>{date && formatDate(date)}</p>
             </div>
+
+          
         </div>
    
   )
