@@ -1,6 +1,5 @@
 const express = require("express");
 const SaveModel = require("../model/saveBlog");
-const postModel = require("../model/postModel")
 const router = express.Router();
 
 
@@ -47,7 +46,7 @@ router.post("/", async (req, res)=>{
     const newFav = await addFav.save();
 
     if(newFav){
-        console.log(newFav)
+       // console.log(newFav)
         return res.status(200).json({msg:"succesfully saved Blog",data:newFav})
 
     }
@@ -67,7 +66,7 @@ router.delete('/delete',async(req, res)=>{
     const {pass}= req.query;
     try{
         if(pass == "sadha"){
-            console.log("deleted")
+            // console.log("deleted")
             await SaveModel.deleteMany({})
             return res.status(200).json({ msg: 'deleted all' });
 
@@ -84,7 +83,7 @@ router.delete('/delete',async(req, res)=>{
    router.delete('/:id',async (req, res)=>{
     const {id} = req.params;
     const {user_id} = req.query;
-    console.log(user_id)
+    //console.log(user_id)
     
     try{
         if(!user_id){

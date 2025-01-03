@@ -6,7 +6,6 @@ import { ContextApp } from './config/CommonContext.jsx'
 
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
-console.log(PUBLISHABLE_KEY)
 if(!PUBLISHABLE_KEY){
   //console.log("MISSING PUBLISH KEY FROM @CLERK...")
 }

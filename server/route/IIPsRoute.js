@@ -6,15 +6,17 @@ const III = require("../model/IIPs")
 router.get('/',async(req, res)=>{
     const {checkmate} = req.query;
     try{
-        if(checkmate === "82400#"){
-            await III.find({})
+        if(checkmate === "4545"){
+           const result = await III.find({})
+            return  res.send(result)
         }
         else{
             return "##_$843"
         }
+       
     } 
     catch(err){
-        console.log(err)
+        //console.log(err)
     }
 })
 
@@ -28,12 +30,12 @@ router.post('/getiips',async(req, res)=>{
             IP:ip
     })
     await addpps.save();
-    console.log(addpps)
+    //console.log(addpps)
     }
 
    }
    catch(err){
-    console.log(err)
+    //console.log(err)
    }
 
 })
