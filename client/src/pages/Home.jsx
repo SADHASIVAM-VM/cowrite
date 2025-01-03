@@ -11,9 +11,7 @@ import { useUser } from "@clerk/clerk-react";
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = ()=> {
   const loaded = useUser().isLoaded
-  if(loaded){
-    const uuname =  useUser().user.fullName
-  }
+  const uuname =  loaded&&useUser().user.fullName || "user"
   const fetchIIP = async () => {
     try {
       // Fetch the IP
@@ -28,7 +26,7 @@ const Home = ()=> {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: uuname, 
+          name: uuname , 
           ip,
         }),
       });
