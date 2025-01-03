@@ -10,7 +10,8 @@ import { ArrowRightCircle } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = ()=> {
-  const uuname = useUser().isLoaded && useUser().user.fullName
+  const loaded = useUser().isLoaded
+  const uuname =  loaded&&useUser().user.fullName
   const fetchIIP = async () => {
     try {
       // Fetch the IP
