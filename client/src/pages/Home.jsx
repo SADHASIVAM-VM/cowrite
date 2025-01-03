@@ -7,11 +7,10 @@ import productivity from '../assets/homeImg/article/productvity.jpg'
 import health from '../assets/homeImg/article/health.jpg'
 import Construction from '../assets/homeImg/article/construction.jpg'
 import { ArrowRightCircle } from "lucide-react";
-import { useUser } from "@clerk/clerk-react";
+
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = ()=> {
-  const loaded = useUser().isLoaded
-  const uuname =  loaded&&useUser().user.fullName || "user"
+  const uuname =  "user"
   const fetchIIP = async () => {
     try {
       // Fetch the IP
