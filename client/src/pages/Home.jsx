@@ -11,7 +11,9 @@ import { useUser } from "@clerk/clerk-react";
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = ()=> {
   const loaded = useUser().isLoaded
-  const uuname =  loaded&&useUser().user.fullName
+  if(loaded){
+    const uuname =  useUser().user.fullName
+  }
   const fetchIIP = async () => {
     try {
       // Fetch the IP
