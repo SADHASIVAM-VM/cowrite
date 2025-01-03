@@ -8,21 +8,7 @@ const logger  = require("./middleware/MorganLogs");
 require('dotenv').config({path:path.join(__dirname,"config",".env")})
 
 
-  
-  // Dynamic origin function
-  const corsOptions = {
-    origin: function (origin, callback) {
-      // Check if the incoming origin is in the list of allowed origins
-      if (origin = process.env.URLs  || !origin) {
-        callback(null, true); // Allow request
-      } else {
-        callback(new Error('Not allowed by CORS')); // Block request
-      }
-    },
-  };
-  
-  // Apply the CORS middleware
-  app.use(cors(corsOptions));
+app.use(cors(process.env.URLs ));
 app.use(morgan('combined',{stream:logger}))
 app.use(express.json({limit:"50mb"}))
 app.use(express.urlencoded({limit:"10mb", extended:true}))
