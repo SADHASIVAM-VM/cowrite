@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import BlogCard from '../components/blogCard';
+import BlogCard from '../components/BlogCard';
 import { useUser } from '@clerk/clerk-react';
 import loading from '../assets/loading/spinner.svg';
 import { SkeletonCard } from '../components/skeleton';
+import { Search } from 'lucide-react';
 
 const URLs = import.meta.env.VITE_BASEURL;
 
@@ -68,20 +69,23 @@ const BlogListing = () => {
       ) : (
         <div>
           {/* Search and Filters */}
-          <div className="flex p-2 md:p-5 gap-5">
+          <div className="flex md:flex-row flex-col p-2 md:p-5 gap-2 md:gap-5">
+            <div className="w-full relative ">
             <input
               type="text"
               placeholder="Search..."
-              className="border-2 rounded-lg p-2 border-[#d8d8d8] flex-1"
+              className="border-2  p-2 w-full  flex-1 bg-transparent"
               onChange={(e) => setSearchNow(e.target.value)}
             />
-            <div className="flex flex-1 gap-2 md:gap-5 justify-end">
+            <span className='absolute top-2 right-2 opacity-50'><Search /></span>
+            </div>
+            <div className="flex flex-1 gap-2 md:gap-5 md:justify-end ">
               <select
-                className="border-2 rounded-lg p-2 border-[#d8d8d8]"
+                className="border-2  p-2 bg-transparent"
                 value={topicFilter}
                 onChange={(e) => setTopicFilter(e.target.value)}
               >
-                <option value="" selected>
+                <option value="" selected >
                   Topics
                 </option>
                 <option value="ai">AI</option>
@@ -90,7 +94,7 @@ const BlogListing = () => {
                 <option value="technical">Technical</option>
               </select>
               <select
-                className="border-2 rounded-lg p-2 border-[#d8d8d8]"
+                className="border-2  p-2 bg-transparent "
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
               >
@@ -103,22 +107,22 @@ const BlogListing = () => {
 
           {/* Tags */}
           <div className="p-4">
-            <h1 className="font-bold mb-2 text-[#413f3f]">Tags</h1>
-            <div className="flex flex-wrap gap-5 mb-4">
+            <h1 className="font-bold mb-2 opacity-70">Tags</h1>
+            <div className="flex overflow-scroll gap-5 mb-4">
               {['AI', 'Money', 'Technical', 'Code'].map((tag, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#f4f4f4] p-3 text-center rounded-lg cursor-pointer"
+                  className="shadow-md border p-2 text-center rounded-lg cursor-pointer"
                   onClick={() => setTopicFilter(tag.toLowerCase())}
                 >
-                  <p className="font-bold">{tag}</p>
+                  <p className="font-light text-sm">{tag}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Blogs */}
-          <h1 className="text-2xl md:text-4xl font-bold mb-5">Blogs:</h1>
+          <h1 className="text-3xl hq md:text-4xl font-bold mb-5">Blogs:</h1>
           <div className="grid md:grid-cols-3 gap-5 p-2">
             {
               data && data.length > 0 ?

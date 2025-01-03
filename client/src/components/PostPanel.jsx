@@ -114,6 +114,7 @@ function PostPanel() {
 
   return (
     <div className="p-2 relative">
+      <h1 className="text-3xl hq mb-2">{editBlog ?"Update Blog":"Create A Blog"}</h1>
       <form action="" className="space-y-2" onSubmit={onsubmitting}>
        <div className="space-y-4 ">
        <input
@@ -153,7 +154,7 @@ function PostPanel() {
       <div className="mt-3">
       <ReactQuill className="h-[250px]" ref={quillRef} theme="snow" modules={{ toolbar: true }} value={blogData.content} onChange={handleQuillChange} />
       </div>
-      {loading && <div className="loading-spinner"><img src={spinners} alt="" /></div>}
+      {loading && <div className="loading-spinner absolute bg-black bg-opacity-70 w-full top-0 left-0 h-full z-10 flex justify-center items-center"><img src={spinners} alt="" className="w-[50px] z-10"/></div>}
     </div>
   );
 }

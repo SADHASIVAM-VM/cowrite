@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
 import { useUser} from '@clerk/clerk-react'
 import empty from '/empty.png'
@@ -27,7 +27,7 @@ const Myblogs = () => {
   return (
     <div>
 
-    <h1 className='text-2xl md:text-4xl font-bold mb-5 hq '>My Blogs :</h1>
+    <h1 className='text-3xl md:text-4xl font-bold hq '>My Blogs :</h1>
     <div className="grid md:grid-cols-3 gap-5">
         {
           data && data.length > 0 && data?.map((e)=> 

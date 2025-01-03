@@ -12,6 +12,7 @@ import Signin from './components/Signin'
 import { Toaster } from 'react-hot-toast'
 import { useMyContext } from './config/CommonContext'
 import Myblogs from './components/myblogs'
+import Save from './pages/Save'
 const App = () => {
 const {theme} = useMyContext();
 console.log(theme)
@@ -58,6 +59,18 @@ console.log(theme)
            
           ),
           path:'/blog/:id'
+
+        }
+        ,
+        {
+          element:(
+            <ProtectedRoutes>
+              
+              <Save/>
+            </ProtectedRoutes>
+           
+          ),
+          path:'/save'
 
         }
       ]

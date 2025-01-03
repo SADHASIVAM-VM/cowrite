@@ -20,13 +20,15 @@ import { useMyContext } from '../config/CommonContext'
 
 
 // import blog from '../assets/blogexp.webp'
-const BlogCard = ({title, img, date, id, del,EditContent}) => {
+const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
     const [delEditId, setDelEditId] = useState('');
    // console.log(img)
     const URLs = import.meta.env.VITE_BASEURL
     //console.log(URLs)
     const navigate = useNavigate()
-    const {editBlog, setEditBlog, setMenuSwitch} = useMyContext()
+    const {editBlog, setEditBlog, setMenuSwitch, setStared} = useMyContext()
+    console.log(star)
+    setStared(star);
  
 
     const formatDate =(postDate)=>{
@@ -87,7 +89,7 @@ const BlogCard = ({title, img, date, id, del,EditContent}) => {
         </div>
           }
 
-            <div className="img p-2 hover:p-1 border-2 border-[#d8d8d8] hover:border-[#84ff71f7] rounded-md w-full md:h-[300px]  inline-flex transition-all" onClick={()=> navigate('/blog/'+id)}>
+            <div className="img p-2 hover:p-1 border-2 border-[#d8d8d8] hover:border-[#84ff71f7] rounded-md w-full h-[300px]  inline-flex transition-all" onClick={()=> navigate('/blog/'+id)}>
                     <img src={`${URLs}/`+img} alt="" className='object-contain rounded-md w-full h-full transition-all cursor-pointer' />
             </div>
             <div className="flex space-y-1 flex-col mt-2">

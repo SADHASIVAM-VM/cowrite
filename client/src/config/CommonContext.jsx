@@ -1,13 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const MyContext = createContext();
 
 export function ContextApp({children}){
     const [editBlog, setEditBlog] = useState();
     const [MenuSwitch, setMenuSwitch] = useState('newpost');
-
-
-    console.log(editBlog)
+    const [stared, setStared] =useState();
 
 
 
@@ -15,7 +13,8 @@ export function ContextApp({children}){
     // values provider
     const ContextValues ={
         editBlog, setEditBlog,
-        MenuSwitch, setMenuSwitch
+        MenuSwitch, setMenuSwitch,
+        stared, setStared
     }
 
 

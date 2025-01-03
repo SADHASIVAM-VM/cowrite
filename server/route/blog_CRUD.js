@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await postModel.find({ _id: id });
+    const result = await postModel.find({ _id: id }).populate("user_id");
 
     if (!result) {
       return res.status(400).json({ msg: "No post Found" });
@@ -95,7 +95,7 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-router.put("/:id",upload.none(), async (req, res) => {
+router.put("/:id",upload.any(), async (req, res) => {
   const { id } = req.params;
  const {user_id,username,title,description, content } = req.body;
 

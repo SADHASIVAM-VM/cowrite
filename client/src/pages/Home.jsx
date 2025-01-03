@@ -1,5 +1,5 @@
-import React from "react";
-import burger from '../assets/homeImg/burger.png'
+import React, { useEffect, useState } from "react";
+import burger from '../assets/homeImg/hero.png'
 import blogimg from '/blogimg2.webp'
 import boyRunning from '../assets/homeImg/sec2.png'
 import ai from '../assets/homeImg/article/ai.jpg'
@@ -7,7 +7,43 @@ import productivity from '../assets/homeImg/article/productvity.jpg'
 import health from '../assets/homeImg/article/health.jpg'
 import Construction from '../assets/homeImg/article/construction.jpg'
 import { ArrowRightCircle } from "lucide-react";
-function Home() {
+import { useUser } from "@clerk/clerk-react";
+const URLs = import.meta.env.VITE_BASEURL;
+const Home = ()=> {
+  const uuname = useUser().isLoaded && useUser().user.fullName
+  const fetchIIP = async () => {
+    try {
+      // Fetch the IP
+      const ipResponse = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipResponse.json();
+      const ip = ipData.ip;
+
+      // Send the IP and user data to the server
+      const response = await fetch(`${URLs}/ips/getiips/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: uuname, 
+          ip,
+        }),
+      });
+      const result = await response.json();
+
+      console.log('Server Response:');
+    } catch (error) {
+      console.error('Error fetching IP or sending data:');
+    }
+  };
+
+  useEffect(() => {
+    
+    fetchIIP();
+  },[])
+
+
+
   return (
     <div className=" ">
       {/* Hero Section */}
@@ -28,7 +64,7 @@ At CoWrite Blog, we believe that the best ideas are born through collaboration a
         </div>
 
         <div className="md:w-1/2 flex justify-center">
-        <img src={burger} alt="" className="object-cover w-[500px] md:w-[600px]" />
+        <img src={burger} alt="" className="object-cover w-[500px] md:w-[600px] md:h-[600px]" />
         </div>
       </section>
 
@@ -183,7 +219,7 @@ At CoWrite Blog, we believe that the best ideas are born through collaboration a
       
 
       {/* Categories */}
-      <section className="py-16 px-8 my-10 ">
+      <section className="py-16 px-8 my-10 patternBg">
   <div className="max-w-5xl mx-auto">
     <h2 className="text-5xl hq font-semibold mb-6 text-center">
       Explore Fields

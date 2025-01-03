@@ -12,13 +12,23 @@ import CommentBox from '../components/comment'
 import { useParams } from 'react-router-dom'
 import loading from '../assets/loading/spinner.svg'
 import { Star, StarOff } from 'lucide-react'
+import { useUser } from '@clerk/clerk-react'
+import { useMyContext } from '../config/CommonContext'
+import toast from 'react-hot-toast'
 
 
 const URLs = import.meta.env.VITE_BASEURL
+
 const SingleBlog = () => {
+  const user_id = useUser().user.id;
+console.log(user_id)
   const {id} = useParams()
   // console.log(id)
   const [data, setData] =useState()
+  const {stared,setStared} = useMyContext();
+  
+
+
 useEffect(()=>{
   const load =async ()=>{
      const fetchUrl =  await fetch(URLs+'/post/'+id);
@@ -27,8 +37,48 @@ useEffect(()=>{
      setData(data)   
   }
   load();
+
 },[])
-console.log(data)
+
+// save blog or postBlog
+const saveBlog =async()=>{
+  setStared(true)
+  const data ={
+      saveBlogId:id,
+      user_id:user_id,
+      star:true
+    
+  }
+ await fetch(`${URLs}/save`,{
+  method:"POST",
+  headers:{
+    'Content-Type': 'application/json' 
+  },
+  body:JSON.stringify(data)
+ }).then((res)=> {
+  if(res.status == "400"){
+     toast.error("already Exist");
+  }
+  else{
+    toast.success("Successfully Saved");
+  }
+ })
+
+}
+
+// remove blog from Saved
+const removeBlog =async()=>{
+  setStared(false)
+  console.log("delete")
+ 
+ await fetch(`${URLs}/save/${id}?user_id=${user_id}`,
+  {method:"DELETE"})
+  .then((res)=> (res.json()))
+  .then((res)=> toast.success(res.msg))
+  .catch(()=> toast.error("err"))
+}
+
+
 // date format
 const formatDate =(postDate)=>{
   const date = new Date(postDate);
@@ -69,8 +119,7 @@ const formatDate =(postDate)=>{
 
        <div className="flex items-center justify-between gap-5">
        <h1 className='text-4xl text-wrap'>{data.title}</h1>
-       <span className='pr-5' >{
-        true?<Star fill='red' color=''/>:<Star/>}</span>
+       <span className='pr-5' ><Star fill={stared&&stared?'red':''}  onClick={stared != true ? saveBlog : removeBlog}/></span>
        </div>
         <p className='opacity-70 font-bold my-5 mb-10 '>{data.description}</p>
 

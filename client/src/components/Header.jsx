@@ -1,4 +1,4 @@
-import { Briefcase, HeartIcon, LogInIcon, Menu } from 'lucide-react'
+import { Briefcase, HeartIcon, LogInIcon, Menu, X } from 'lucide-react'
 import React, {useState } from 'react'
 import { ModeToggle } from './toogle'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -8,38 +8,43 @@ import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react'
 const Header = () => {
  const {isSignedIn}= useUser()
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState();
   const {pathname}= useLocation();
-
+  
+  
   return (
-    <div className='flex justify-between items-center h-[70px] px-5 md:px-16'>
+    <div className='flex justify-between  items-center h-[70px] px-5 md:px-16'>
       
       {/* logo */}
       <div className="">
-        <h1 className='text-2xl logo'>Co<span className='text-yellow-300'>Write</span></h1>
+        <h1 className='text-2xl logo cursor-pointer' onClick={()=> navigate('/')}>Co<span className='text-yellow-300'>Write</span></h1>
       </div>
 
       {/* menu */}
       <div className=" md-px-5 p-2 rounded-full">
       <div className="hidden md:flex">
-        <ul className='flex space-x-2'>
-          <li>Home</li>
-          <li>Blogs</li>
-          <li>Saved</li>
-          <li>My Space</li>
+        <ul className='flex space-x-2 cursor-pointer'>
+          <li onClick={()=> navigate('/')} className='hover:scale-[1.1] transition-all'>Home</li>
+          <li onClick={()=> navigate('/blogs')} className='hover:scale-[1.1] transition-all'>Blogs</li>
+          <li onClick={()=> navigate('/save')} className='hover:scale-[1.1] transition-all'>Favorite</li>
+          <li onClick={()=> navigate('/post')} className='hover:scale-[1.1] transition-all'>My Space</li>
         </ul>
       </div>
     <div className="md:hidden">
-      <Menu onClick={()=> setOpen(!open)} className='cursor-pointer'/>
+      <div  className='cursor-pointer'>
+        {
+          !open ? <Menu onClick={()=> setOpen(true)}/> : <X onClick={()=> setOpen(false)}/>
+        }
+      </div>
       {
         open &&
-      <div className="absolute bg-white left-0 top-[70px] z-20  w-full flex justify-center p-5">
-        <ul className='space-y-3'>
-        <li>Home</li>
-        <li>Blogs</li>
-        <li>Saved</li>
-        <li>My Space</li>
-      </ul>``
+      <div className="absolute bg-white bg-opacity-90 text-black left-0 top-[70px] z-20  w-full flex justify-center p-5">
+        <ul className='space-y-3 cursor-pointer'>
+        <li onClick={()=> navigate('/')} className='hover:scale-[1.1] transition-all'>Home</li>
+          <li onClick={()=> navigate('/blogs')} className='hover:scale-[1.1] transition-all'>Blogs</li>
+          <li onClick={()=> navigate('/save')} className='hover:scale-[1.1] transition-all'>Favorite</li>
+          <li onClick={()=> navigate('/post')} className='hover:scale-[1.1] transition-all'>My Space</li>
+      </ul>
       </div>
 
       }
