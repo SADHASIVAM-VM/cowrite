@@ -117,7 +117,7 @@ const Home = ()=> {
       <section className="text-white flex flex-col md:flex-row items-center relative py-16  text-center  herosvg">
         <div className="black"></div>
       <div className="z-10 p-5 flex flex-col  items-center">
-                <h1 className="text-2xl md:text-6xl lg:text-8xl  hq">{"<h1>"}<span className="text-yellow-400 hd font-bold"> CoWrite </span> {"</h1>"}</h1>
+                <h1 className="text-2xl md:text-6xl lg:text-8xl  hd">{"<h1>"}<span className="text-yellow-400 hd font-bold"> CoWrite </span> {"</h1>"}</h1>
                 <h3 className="my-2 text-sm md:text-xl font-medium ">Where Creativity Meets Collaboration
                 </h3>
                 <p className="text-sm md:text-[16px] text-[#f4f4f4] lg:w-[50%] lg:text-lg mb-6  text-justify">
