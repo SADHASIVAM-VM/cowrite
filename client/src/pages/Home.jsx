@@ -226,7 +226,7 @@ Stay informed, stay inspired, and become a part of the CoWrite community—where
     {
       testimonials.map((e, index)=> (
       
-      <CarouselItem className="lg:basis-1/3 border rounded-md p-5 space-y-3 ml-4">
+      <CarouselItem key={index} className="lg:basis-1/3 border rounded-md p-5 space-y-3 ml-4">
         <div className="space-y-2">
             <User2/>
             <div className="flex gap-2 ">
