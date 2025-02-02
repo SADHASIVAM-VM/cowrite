@@ -105,12 +105,8 @@ const formatDate =(postDate)=>{
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbPage> <p className='logo '>{data.title.length >30 ? `${data.title.slice(0, 30)}....`:data.title}</p></BreadcrumbPage>
-    </BreadcrumbItem>
-    <BreadcrumbItem>
-    <BreadcrumbSeparator>
-     | <span className='hq'>{formatDate(data.postAt)}</span> | 5 min read
-    </BreadcrumbSeparator></BreadcrumbItem>
+      <BreadcrumbPage> <p className=' '>{data.title.length >30 ? `${data.title.slice(0, 30)}....`:data.title}</p></BreadcrumbPage>
+    </BreadcrumbItem>    
   </BreadcrumbList>
     </Breadcrumb>
 
@@ -118,10 +114,10 @@ const formatDate =(postDate)=>{
      </div>
 
        <div className="flex items-center justify-between gap-5">
-       <h1 className='text-4xl text-wrap'>{data.title}</h1>
+       <h1 className='text-2xl font-bold text-wrap'>{data.title}</h1>
        <span className='pr-5' ><Star fill={stared&&stared?'red':''}  onClick={stared != true ? saveBlog : removeBlog}/></span>
        </div>
-        <p className='opacity-70 font-bold my-5 mb-10 '>{data.description}</p>
+        <p className='opacity-70  my-5 mb-10 '>{data.description}</p>
 
       <div className="flex flex-col md:flex-row gap-5 relative">
         <div className="md:w-3/4 order-2 md:order-1">

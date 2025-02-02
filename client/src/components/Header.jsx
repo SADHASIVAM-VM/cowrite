@@ -1,89 +1,99 @@
-import { Briefcase, HeartIcon, LogInIcon, Menu, X } from 'lucide-react'
-import React, {useState } from 'react'
-import { ModeToggle } from './toogle'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { SignedIn, SignedOut, UserButton, useUser } from '@clerk/clerk-react'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CircleX, LogIn, Menu, Moon, MoonStar, Sun, SunDim, X } from 'lucide-react';
+import { useTheme } from './Themeproviders';
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react';
 
-
-const Header = () => {
- const {isSignedIn}= useUser()
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
-  const [open, setOpen] = useState();
-  const {pathname}= useLocation();
-  
-  
+
+  const {theme,setTheme} = useTheme()
+
+
+  // Handle screen resizing to reset the menu state
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setOpen(false); // Close menu when switching to desktop
+        setIsMobile(false);
+      } else {
+        setIsMobile(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className='flex justify-between  items-center h-[70px] px-5 md:px-16'>
+    <div className="flex justify-between items-center h-[70px] px-5 md:px-16 relative">
       
-      {/* logo */}
-      <div className="">
-        <h1 className='text-2xl logo cursor-pointer' onClick={()=> navigate('/')}>Co<span className='text-yellow-300'>Write</span></h1>
+      {/* Logo (Hidden in mobile when menu is open) */}
+      <div className={`flex-1 ${open && isMobile ? 'hidden' : 'flex'}`}>
+        <h1 className="text-2xl font-bold cursor-pointer hd" onClick={() => navigate('/')}>
+          Co<span className="text-yellow-300">Write</span>
+        </h1>
       </div>
 
-      {/* menu */}
-      <div className=" md-px-5 p-2 rounded-full">
-      <div className="hidden md:flex">
-        <ul className='flex space-x-2 cursor-pointer'>
-          <li onClick={()=> navigate('/')} className='hover:scale-[1.1] transition-all'>Home</li>
-          <li onClick={()=> navigate('/blogs')} className='hover:scale-[1.1] transition-all'>Blogs</li>
-          <li onClick={()=> navigate('/save')} className='hover:scale-[1.1] transition-all'>Favorite</li>
-          <li onClick={()=> navigate('/post')} className='hover:scale-[1.1] transition-all'>My Space</li>
+      {/* Navigation Menu */}
+      <div className="md:px-5 p-2 flex-1 flex justify-center">
+        <ul
+          className={`text-sm font-medium flex space-x-5 cursor-pointer transition-all ${
+            open || !isMobile ? 'flex' : 'hidden md:flex'
+          }`}
+        >
+          <li onClick={() => { navigate('/'); setOpen(false); }} className="hover:scale-110 transition-all">Home</li>
+          <li onClick={() => { navigate('/blogs'); setOpen(false); }} className="hover:scale-110 transition-all">Blogs</li>
+          <li onClick={() => { navigate('/save'); setOpen(false); }} className="hover:scale-110 transition-all">Favorite</li>
+          <li onClick={() => { navigate('/post'); setOpen(false); }} className="hover:scale-110 transition-all">action</li>
         </ul>
       </div>
-    <div className="md:hidden">
-      <div  className='cursor-pointer'>
-        {
-          !open ? <Menu onClick={()=> setOpen(true)}/> : <X onClick={()=> setOpen(false)}/>
-        }
-      </div>
-      {
-        open &&
-      <div className="absolute bg-white bg-opacity-90 text-black left-0 top-[70px] z-20  w-full flex justify-center p-5">
-        <ul className='space-y-3 cursor-pointer'>
-        <li onClick={()=> navigate('/')} className='hover:scale-[1.1] transition-all'>Home</li>
-          <li onClick={()=> navigate('/blogs')} className='hover:scale-[1.1] transition-all'>Blogs</li>
-          <li onClick={()=> navigate('/save')} className='hover:scale-[1.1] transition-all'>Favorite</li>
-          <li onClick={()=> navigate('/post')} className='hover:scale-[1.1] transition-all'>My Space</li>
-      </ul>
+
+      {/* Sign-In Button (Hidden in mobile when menu is open) */}
+      <div className={`flex-1 flex items-center justify-end gap-2 ${open && isMobile ? 'hidden' : 'flex'}`}>
+        <button className=" px-4 py-2 rounded-md text-black font-semibold">
+         {
+          useUser().isSignedIn ? <div className="flex items-center justify-center gap-2">
+          <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        </div>
+          :<LogIn size={20} color={theme == "dark" ? "white":"black"}/>
+         }
+          
+        </button>
+
+        <button className='flex mr-3'>
+          {
+            theme == "dark" ?
+            <Sun size={20} color='yellow' onClick={()=> setTheme("light")}/>
+            :<Moon size={20} onClick={()=> setTheme("dark")} />
+          }
+        </button>
       </div>
 
-      }
+      {/* Mobile Menu Toggle Button */}
+      <div className="md:hidden cursor-pointer" onClick={() => setOpen(!open)}>
+        {!open ? <Menu size={25} /> : <CircleX size={20} color='red'/>}
+      </div>
+
     </div>
 
-      </div>
 
-      {/* login */}
-      <div className="flex items-center justify-center gap-2">
-      <div className="flex">
-       <ModeToggle onClick={()=> setOpen(!open)}/>
-      </div>
-      <div className="">
-            
-            <SignedOut>
-            
-            {isSignedIn || pathname == '/' &&
-              <button  className='rounded-md flex  p-2 gap-2 button-83' role='button'onClick={()=> navigate('/signin')} ><LogInIcon/> </button>
-            }
-    
-            </SignedOut>
-         <SignedIn >
-          <div className="flex gap-5">
-            <UserButton appearance={{elements:{avatarBox:" outline outline-offset-1 outline-green-400"}}} className="w-20">
-              <UserButton.MenuItems>
-                <UserButton.Link  labelIcon={<Briefcase className='w-3'/>} label='My Blogs' href='/applicant'/>
-                <UserButton.Link  labelIcon={<HeartIcon className='w-3'/>} label='Fav Blogs' href='/savedjob'/>
-              </UserButton.MenuItems>
-            </UserButton>
-          </div>
-          </SignedIn>
-          </div>
 
-      </div>
 
-      
 
-    </div>
-  )
-}
 
-export default Header
+
+
+
+  );
+};
+
+export default Navbar;

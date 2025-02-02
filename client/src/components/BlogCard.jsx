@@ -60,7 +60,7 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
     }
   return (
   
-        <div className=""  >
+        <div  >
            
           {
             del &&  <div className= " flex gap-3 float-end mr-5 mb-3">
@@ -92,11 +92,11 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
             <div className="img p-2 hover:p-1 border-2 border-[#d8d8d8] hover:border-[#84ff71f7] rounded-md w-full h-[300px]  inline-flex transition-all" onClick={()=> navigate('/blog/'+id)}>
                     <img src={`${URLs}/`+img} alt="" className='object-contain rounded-md w-full h-full transition-all cursor-pointer' />
             </div>
-            <div className="flex space-y-1 flex-col mt-2">
-                <p className="font-bold hq text-2xl ">
+            <div className="flex space-y-1 flex-row justify-between mt-2">
+                <p className="font-bold  text-xl ">
                     {title}
                 </p>
-                <p className='opacity-50 text-sm font-mono font-bold'>{date && formatDate(date)}</p>
+                <p className='opacity-70 text-sm font-mono font-bold'>🕛{date && formatDate(date)}</p>
             </div>
 
           

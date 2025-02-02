@@ -61,7 +61,7 @@ const BlogListing = () => {
   }, [searchNow, topicFilter, sortOption, data]);
 
   return (
-    <>
+    <div className='pt-5 pb-10'>
       {!isLoaded ? (
         <div className="flex justify-center w-full h-[90vh] bg-opacity-70">
           <img src={loading} alt="Loading" className="w-16" />
@@ -81,24 +81,24 @@ const BlogListing = () => {
             </div>
             <div className="flex flex-1 gap-2 md:gap-5 md:justify-end ">
               <select
-                className="border-2  p-2 bg-transparent"
+                className="border-2  p-2 bg-transparent text-red-500"
                 value={topicFilter}
                 onChange={(e) => setTopicFilter(e.target.value)}
               >
                 <option value="" selected >
                   Topics
                 </option>
-                <option value="ai">AI</option>
+                <option value="ai" s>AI</option>
                 <option value="fashion">Fashion</option>
                 <option value="money">Money</option>
                 <option value="technical">Technical</option>
               </select>
               <select
-                className="border-2  p-2 bg-transparent "
+                className="border-2  p-2 bg-transparent text-green-500"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
               >
-                <option value="popular">Popular</option>
+                <option value="popular" >Popular</option>
                 <option value="most_viewed">Most Viewed</option>
                 <option value="most_liked">Most Liked</option>
               </select>
@@ -123,7 +123,7 @@ const BlogListing = () => {
 
           {/* Blogs */}
           <h1 className="text-3xl hq md:text-4xl font-bold mb-5">Blogs:</h1>
-          <div className="grid md:grid-cols-3 gap-5 p-2">
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-5 space-y-2 md:space-y-0 p-2">
             {
               data && data.length > 0 ?
               (filteredData.length > 0 ? (
@@ -150,7 +150,9 @@ const BlogListing = () => {
           </div>
         </div>
       )}
-    </>
+
+      <p className='text-sm text-center pt-10 opacity-70'>love from CoWrite ❤️</p>
+    </div>
   );
 };
 

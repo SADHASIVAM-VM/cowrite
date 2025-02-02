@@ -1,13 +1,13 @@
 import { FacebookIcon, Instagram, Linkedin, MailCheck, SubscriptIcon, TwitterIcon } from "lucide-react";
 const Footer =()=> {
   return (
-    <footer className="  py-10 border-t ">
+    <footer className="  py-10 border-t text-white bg-[#151313] ">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Section */}
           <div>
-            <h2 className="text-4xl font-bold mb-4 hd">Co<span className="text-yellow-400">Write</span></h2>
+            <h2 className="text-2xl md:text-4xl font-bold mb-4 hd">Co<span className="text-yellow-400">Write</span></h2>
             <p className="opacity-50">
               CoWrite is your go-to platform for insightful blogs, fresh ideas,
               and expert advice. Stay connected to the trends that matter.
@@ -16,7 +16,7 @@ const Footer =()=> {
 
           {/* Useful Links */}
           <div>
-            <h2 className="text-xl font-bold mb-4">Useful Links</h2>
+            <h2 className="text-xl  font-bold mb-4">Useful Links</h2>
             <ul className="space-y-2">
               <li>
                 <a
@@ -115,8 +115,8 @@ const Footer =()=> {
 
           {/* Contact Info */}
           <div className="mt-6 md:mt-0 text-gray-400">
-            <p>Contact us: <a href="mailto:support@beloom.com" className="hover:text-white">support@beloom.com</a></p>
-            <p>Phone: 91+ 00000 00000</p>
+            <p>Contact us: <a href="mailto:support@beloom.com" className="hover:text-white">support@cowrite.com</a></p>
+            <p>Phone: 91+ 90000 80000</p>
           </div>
         </div>
       </div>
