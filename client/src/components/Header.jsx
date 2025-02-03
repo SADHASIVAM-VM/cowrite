@@ -106,9 +106,10 @@ const Navbar = () => {
           open && isMobile ? "hidden" : "flex"
         }`}
       >
-        <button className=" px-2 py-1 rounded-md border-2 text-sm font-bold">
-          <SignedOut>
-            <SignInButton />
+        <button className=" px-2 py-1  text-sm font-bold">
+          
+          <SignedOut className="">
+            <SignInButton className="text-[12px] border-2 p-1 rounded-md"/>
           </SignedOut>
 
           <SignedIn>
