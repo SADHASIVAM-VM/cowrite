@@ -43,7 +43,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center h-[70px] px-5 md:px-16 relative">
+    <div className="flex justify-between items-center h-[70px] px-2 md:px-16 relative">
       {/* Logo (Hidden in mobile when menu is open) */}
       <div className={`flex-1 ${open && isMobile ? "hidden" : "flex"}`}>
         <h1
@@ -100,16 +100,16 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Sign-In Button (Hidden in mobile when menu is open) */}
+      {/* Sign-In Button*/}
       <div
         className={`flex-1 flex items-center justify-end gap-2 ${
           open && isMobile ? "hidden" : "flex"
         }`}
       >
-        <button className=" px-2 py-1  text-sm font-bold">
+        <button className="  ">
           
           <SignedOut className="">
-            <SignInButton className="text-[12px] border-2 p-1 rounded-md"/>
+            <SignInButton className=" md:text-[12px] border-2 p-1 rounded-md">{isMobile? <LogIn size={"28px"}/> : <span className="py-1 px-2 border-2">sign in</span>}</SignInButton>
           </SignedOut>
 
           <SignedIn>
@@ -126,7 +126,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Toggle Button */}
+      {/* Mobile Menu */}
       <div className="md:hidden cursor-pointer" onClick={() => setOpen(!open)}>
         {!open ? <Menu size={25} /> : <CircleX size={20} color="red" />}
       </div>

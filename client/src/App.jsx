@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast'
 import { useMyContext } from './config/CommonContext'
 import Myblogs from './components/myblogs'
 import Save from './pages/Save'
+import NotFound from './pages/Notfound'
 const App = () => {
 const {theme} = useMyContext();
 console.log(theme)
@@ -71,6 +72,15 @@ console.log(theme)
            
           ),
           path:'/save'
+
+        },
+        {
+          element:(
+ 
+              
+              <NotFound/>
+          ),
+          path:'/*'
 
         }
       ]

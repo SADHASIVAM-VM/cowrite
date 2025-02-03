@@ -1,4 +1,4 @@
-import { HeartIcon, ReplyIcon, User2 } from "lucide-react";
+import { HeartIcon, ReplyIcon, SendHorizonal, User2 } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -42,8 +42,8 @@ const Comment = () => {
           });
 
           if (res.ok) {
-              const newComment = await res.json();
-              setFetchComment((prev) => [...prev, newComment]);
+              const nComment = await res.json();
+              setFetchComment((prev) => [...prev, nComment]);
               setNewComment("");
               toast.success("Comment added successfully!");
           } else {
@@ -89,23 +89,23 @@ const Comment = () => {
   // };
 
   return (
-    <div className="w-full mx-auto p-4 border rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Comments</h2>
+    <div className="w-full p-3 my-10 border rounded-lg">
+      <h2 className="text-sm md:text-[16px] lg:text-xl font-semibold mb-4">{"// "}Comments</h2>
 
       {/* Add a New Comment */}
       <div className="mb-6">
-        <textarea
-          className="w-full h-[120px] p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-transparent"
+        <input
+          className="w-full  p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-transparent"
           placeholder="Write a comment..."
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
         <div className="flex justify-end mt-2">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
             onClick={handleAddComment}
           >
-            Publish
+            <SendHorizonal size={"20px"}/>
           </button>
         </div>
       </div>
@@ -113,22 +113,22 @@ const Comment = () => {
       {/* Render Comments */}
       {fetchComment && fetchComment.length > 0 ? (
         fetchComment.map((comment) => (
-          <div key={comment._id} className="space-y-6 p-5 border-b">
+          <div key={comment._id} className="space-y-5 p-1 border-b">
             {/* Comment */}
             <div>
               <div className="flex items-center space-x-2">
                 <span className="bg-black p-2 flex justify-center rounded-full">
                   <User2 color="white" />
                 </span>
-                <h5 className="flex flex-col">
+                <h5 className="flex flex-col font-medium">
                   {comment.username}
-                  <span className="opacity-50 text-sm">30 minutes ago</span>
+                  
                 </h5>
               </div>
-              <p className="ml-12">{comment.comment}</p>
+              <p className="ml-12 text-sm opacity-90">{comment.comment || newComment}</p>
               <div className="ml-12 mt-5 flex gap-4">
                 <button>
-                  <span className="flex gap-2">
+                  <span className="flex gap-2 text-sm">
                     <HeartIcon fill="red" color="" /> {comment.likes} likes
                   </span>
                 </button>
@@ -167,7 +167,7 @@ const Comment = () => {
                 />
                 <div className="flex justify-end mt-2 gap-3">
                   <button
-                    className="bg-green-400 text-white px-4 py-2 rounded-lg hover:bg-green-500"
+                    className="bg-green-400 text-white  px-4 py-2 rounded-lg hover:bg-green-500"
                     onClick={handleReplyToComment}
                   >
                     <ReplyIcon /> Reply
@@ -184,7 +184,7 @@ const Comment = () => {
           </div>
         ))
       ) : (
-        <p>Loading comments...</p>
+        <p className="text-sm md:text-[14px]">{fetchComment&&fetchComment.length == 0 ?"Loading comments...":"no comments yet" }</p>
       )}
     </div>
   );

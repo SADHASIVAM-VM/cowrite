@@ -117,8 +117,8 @@ const Home = () => {
         {/* Hero Section */}
         <section className="text-white flex flex-col md:flex-row items-center relative py-16  text-center  herosvg">
           <div className="black"></div>
-          <div className="z-10 p-5 flex flex-col  items-center">
-            <h1 className="text-2xl md:text-6xl lg:text-8xl  hd">
+          <div className="z-10 px-1 py-5 flex flex-col  items-center">
+            <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-8xl  hd">
               {"<h1>"}
               <span className="text-yellow-400 hd font-bold">
                 {" "}
@@ -129,7 +129,7 @@ const Home = () => {
             <h3 className="my-2 text-sm md:text-xl font-medium ">
               Where Creativity Meets Collaboration
             </h3>
-            <p className="text-sm md:text-[16px] text-[#f4f4f4] lg:w-[50%] lg:text-lg mb-6  text-justify">
+            <p className="text-sm md:text-[16px] px-3 text-[#f4f4f4] lg:w-[70%] lg:text-lg mb-6  text-justify">
               At CoWrite Blog, we believe that the best ideas are born through
               collaboration and creativity. Whether you're an aspiring writer, a
               seasoned storyteller, or just someone looking for inspiration, our
@@ -179,21 +179,27 @@ const Home = () => {
               ideas and share knowledge with others. Whether you're discovering
               something new from someone or teaching valuable insights to
               others, CoWrite is the perfect space to connect, learn, and grow
-              together. Our blog covers a wide range of topics, from the latest
-              tech trends to lifestyle hacks and personal growth insights. We
+              together.  <br />
+               Our blog covers a wide range of topics, from the latest
+              tech trends to lifestyle hacks and personal growth insights.  <br />We
               believe that everyone has something valuable to share, and through
               CoWrite, we aim to create a community where knowledge flows
-              freely. Whether you're a tech enthusiast looking to stay updated,
+              freely.  <br />
+              Whether you're a tech enthusiast looking to stay updated,
               a curious learner eager to explore new perspectives, or someone
-              passionate about sharing experiences, CoWrite is here to inspire
+              passionate about sharing experiences.
+              <br />
+               CoWrite is here to inspire
               and empower you. With expert-backed content, personal stories, and
               practical tips, CoWrite ensures that you’re always gaining
               meaningful knowledge. Our easy-to-read articles help simplify
               complex topics, making learning enjoyable and accessible for
-              everyone. At CoWrite, we encourage an open exchange of ideas,
+              everyone. <br />
+              At CoWrite, we encourage an open exchange of ideas,
               where learning is a two-way journey—you can pick up something new
               from someone and, in turn, teach and inspire others with your
-              experiences. Join us in creating a space where curiosity meets
+              experiences.  <br />
+              Join us in creating a space where curiosity meets
               expertise, and knowledge becomes a shared adventure. Stay
               informed, stay inspired, and become a part of the CoWrite
               community—where every post brings a fresh perspective and an
@@ -213,7 +219,7 @@ const Home = () => {
             <h2 className="text-2xl md:text-4xl lg:text-6xl hq ">
               Popular Articles
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-8">
               {[
                 {
                   img: ai,
@@ -272,11 +278,11 @@ const Home = () => {
                 <CarouselPrevious />
                 <CarouselNext />
               </div>
-              <CarouselContent className="md:space-x-4  flex items-center w-[90vw] ml-2">
+              <CarouselContent className="md:space-x-4  flex items-center w-[90vw] ">
                 {testimonials.map((e, index) => (
                   <CarouselItem
                     key={index}
-                    className="lg:basis-1/3 border rounded-md p-5 space-y-3 ml-4"
+                    className="lg:basis-1/3 border rounded-md p-5 space-y-3 ml-2"
                   >
                     <div className="space-y-2">
                       <User2 />
@@ -285,7 +291,7 @@ const Home = () => {
 
                         <p className="flex items-center gap-1">
                           | {e.rating}{" "}
-                          <StarIcon fill="yellow" color="none" size={15} />
+                          ⭐
                         </p>
                       </div>
                     </div>

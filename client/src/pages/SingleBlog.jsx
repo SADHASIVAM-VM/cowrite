@@ -92,7 +92,7 @@ const formatDate =(postDate)=>{
     <>
     {
       data && data != null ?
-      <div className='p-5'>
+      <div className='px-1 md:px-3'>
      <div className="my-5 ">
      <Breadcrumb>
   <BreadcrumbList>
