@@ -4,6 +4,8 @@ import { useUser } from '@clerk/clerk-react';
 import loading from '../assets/loading/spinner.svg';
 import { SkeletonCard } from '../components/skeleton';
 import { Search } from 'lucide-react';
+import Navbar from '../components/Header';
+import Footer from '../components/Footer';
 
 const URLs = import.meta.env.VITE_BASEURL;
 
@@ -62,6 +64,7 @@ const BlogListing = () => {
 
   return (
     <div className='pt-5 pb-10'>
+      <Navbar/>
       {!isLoaded ? (
         <div className="flex justify-center w-full h-[90vh] bg-opacity-70">
           <img src={loading} alt="Loading" className="w-16" />
@@ -152,6 +155,8 @@ const BlogListing = () => {
       )}
 
       <p className='text-sm text-center pt-10 opacity-70'>love from CoWrite ❤️</p>
+
+      <Footer/>
     </div>
   );
 };

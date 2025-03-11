@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import BlogCard from './BlogCard'
 import { useUser} from '@clerk/clerk-react'
-import empty from '/empty.png'
+import { Bell } from 'lucide-react'
 
 const URLs = import.meta.env.VITE_BASEURL
 const Myblogs = () => {
@@ -39,7 +39,7 @@ const Myblogs = () => {
     </div>
     {
       data ==0 &&
-      <p className='flex justify-center w-full'> <img src={empty} alt="" className='md:w-1/2'/></p>}
+      <p className='flex justify-center w-full'> <Bell/> No items</p>}
     </div>
   )
 }

@@ -17,12 +17,13 @@ import { useMyContext } from '../config/CommonContext'
   
 
 
+const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
 
 
 // import blog from '../assets/blogexp.webp'
 const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
     const [delEditId, setDelEditId] = useState('');
-   // console.log(img)
+   console.log(id)
     const URLs = import.meta.env.VITE_BASEURL
     //console.log(URLs)
     const navigate = useNavigate()
@@ -35,8 +36,7 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
         const date = new Date(postDate);
         return new Intl.DateTimeFormat('en-GB',{
             day:"2-digit",
-            month:"short",
-            year:'numeric'
+            month:"short"
         }).format(date)
     }
 
@@ -90,11 +90,11 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
           }
 
             <div className="img p-2 hover:p-1 border-2 border-[#d8d8d8] hover:border-[#84ff71f7] rounded-md w-full h-[300px]  inline-flex transition-all" onClick={()=> navigate('/blog/'+id)}>
-                    <img src={`${URLs}/`+img} alt="" className='object-contain rounded-md w-full h-full transition-all cursor-pointer' />
+                    <img src={`${URLs}/`+img} alt="" className='object-fit rounded-md w-full h-full transition-all cursor-pointer' onError={(e)=> e.target.src = defaultImage}/>
             </div>
             <div className="flex space-y-1 flex-row justify-between mt-2">
                 <p className="font-bold  text-xl ">
-                    {title}
+                    {title.length > 25 ? title.slice(0, 25)+"....":title}
                 </p>
                 <p className='opacity-70 text-sm font-mono font-bold'>🕛{date && formatDate(date)}</p>
             </div>

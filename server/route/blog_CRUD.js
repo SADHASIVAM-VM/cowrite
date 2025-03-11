@@ -2,32 +2,8 @@ const express = require("express");
 const postModel = require("../model/postModel");
 const router = express.Router();
 const joi = require("joi");
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs")
-const multerS3 = require('multer-s3');
+const upload  = require("../middleware/multerMiddleware");
 
-const FsFolder = path.join((__dirname), '../','uploads')
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  region: process.env.AWS_REGION
-})
-
-// aws storage config
-const upload = multer({
-  storage:multerS3({
-    s3:s3,
-    bucket:process.env.AWS_BUCKET,
-    metadata:(req, res,cb)=>{
-      cb(null,{ fieldName: file.fieldname })
-    },
-    key: (req, file, cb) => {
-      cb(null, `uploads/${Date.now()}_${file.originalname}`);
-  }
-  })
-})
 
 router.get("/", async (req, res) => {
   const result = await postModel.find({});
@@ -57,7 +33,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/",upload.single("image") ,  async (req, res) => {
   // Joi schema validation
   const joiSchema = joi.object({
     title: joi.string().required(),

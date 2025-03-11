@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../components/ui/carousel";
+import Navbar from "../components/Header";
 
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = () => {
@@ -113,12 +114,13 @@ const Home = () => {
 
   return (
     <>
-      <div className="space-y ">
+    <Navbar/>
+      <div className="space-y-10 md:space-y-16 ">
         {/* Hero Section */}
         <section className="text-white flex flex-col md:flex-row items-center relative py-16  text-center  herosvg">
           <div className="black"></div>
-          <div className="z-10 px-1 py-5 flex flex-col  items-center">
-            <h1 className="text-2xl md:text-4xl lg:text-6xl xl:text-8xl  hd">
+          <div className="z-10 px-1  flex flex-col  items-center">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl xl:text-8xl  hd">
               {"<h1>"}
               <span className="text-yellow-400 hd font-bold">
                 {" "}
@@ -129,7 +131,7 @@ const Home = () => {
             <h3 className="my-2 text-sm md:text-xl font-medium ">
               Where Creativity Meets Collaboration
             </h3>
-            <p className="text-sm md:text-[16px] px-3 text-[#f4f4f4] lg:w-[70%] lg:text-lg mb-6  text-justify">
+            <p className="text-sm md:text-[16px] px-1 text-[#f4f4f4] lg:w-[70%] lg:text-lg mb-6  text-justify">
               At CoWrite Blog, we believe that the best ideas are born through
               collaboration and creativity. Whether you're an aspiring writer, a
               seasoned storyteller, or just someone looking for inspiration, our
@@ -138,8 +140,8 @@ const Home = () => {
               community that celebrates the power of words. Let’s create, share,
               and grow together—one story at a time.
             </p>
-            <button className="border-b  border-[#2b2b2b]  font-medium px-6 py-3  transition-all  ">
-              <span className="flex justify-center text-sm  gap-3 hover:gap-5 hover:text-yellow-400 transition-all">
+            <button className=" font-medium px-6 py-3  transition-all  ">
+              <span className="flex justify-center text-sm  gap-3 hover:gap-5 text-black p-2 rounded-md bg-yellow-400 transition-all">
                 Explore Articles <ArrowRightCircle size={"20px"} />
               </span>
             </button>
@@ -147,7 +149,7 @@ const Home = () => {
         </section>
 
         {/* What is CoWrite Blog */}
-        <section className="py-16 px-2 md:px-5 flex flex-col md:flex-row items-center ">
+        <section className=" px-2 md:px-5 flex flex-col md:flex-row items-center ">
           <div className="md:w-1/2 order-1 ">
             <img src={blogimg} alt="" />
           </div>
@@ -168,7 +170,7 @@ const Home = () => {
         </section>
 
         {/* cons */}
-        <section className="py-16 md:px-5 px-2">
+        <section className=" md:px-5 px-2 py-5">
           {/* Content Section */}
           <div className="w-full space-y-4">
             <h2 className="text-2xl md:text-4xl lg:text-6xl hq ">
@@ -205,16 +207,12 @@ const Home = () => {
               community—where every post brings a fresh perspective and an
               opportunity to grow.
             </p>
-            <button className="border-b  border-[#2b2b2b]  font-medium text-sm p-3  transition-all  ">
-              <span className="flex justify-center gap-3 hover:gap-5 hover:text-yellow-400 transition-all">
-                Learn More <ArrowRightCircle size={"20px"} />
-              </span>
-            </button>
+           
           </div>
         </section>
 
         {/* Popular Articles */}
-        <section className="py-16 md:px-5 px-2">
+        <section className=" md:px-5 px-2">
           <div className=" mx-auto">
             <h2 className="text-2xl md:text-4xl lg:text-6xl hq ">
               Popular Articles
@@ -346,11 +344,11 @@ const Home = () => {
 
         {/* Categories */}
         <section className="py-16 px-2 md:px-5 my-10 patternBg">
-          <div className="max-w-5xl mx-auto">
+          <div className="">
             <h2 className="text-2xl md:text-4xl lg:text-6xl hq mb-8 text-center">
               Explore Fields
             </h2>
-            <div className="flex flex-wrap justify-center gap-10 category">
+            <div className="flex flex-wrap justify-center gap-10 ">
               <div className="text-sm bg-blue-100 text-blue-800 px-4 py-2 rounded shadow">
                 Technology
               </div>

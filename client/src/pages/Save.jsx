@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import BlogCard from '../components/BlogCard';
 import { useUser } from '@clerk/clerk-react';
+import Navbar from '../components/Header';
+import Footer from '../components/Footer';
 
 const URLs = import.meta.env.VITE_BASEURL;
 const Save = () => {
@@ -21,14 +23,15 @@ const Save = () => {
 
   return (
     <div>
+      <Navbar/>
       <h1 className='text-3xl hq '>saved Blogs : {data && data.length}</h1>
 
       {
         isLoaded && 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-5 my-10">
         {data && data.length > 0 ?
           data.map((e,inx)=>
-           <BlogCard key={inx} id={e.saveBlogId._id} title={e.saveBlogId.title} img={e.saveBlogId.image} star={e.star} />
+           <BlogCard key={inx} id={e.saveBlogId._id} date={e.saveBlogId.postAt} title={e.saveBlogId.title} img={e.saveBlogId.image}  star={e.star} />
             
           )
           :
@@ -38,6 +41,8 @@ const Save = () => {
         }
       </div>
       }
+
+      <Footer/>
     </div>
   )
 }

@@ -66,7 +66,7 @@ const Navbar = () => {
               navigate("/");
               setOpen(false);
             }}
-            className="hover:scale-110 transition-all"
+            className="hover:-translate-y-1.5 hover:text-blue-400  transition-all"
           >
             Home
           </li>
@@ -75,7 +75,7 @@ const Navbar = () => {
               navigate("/blogs");
               setOpen(false);
             }}
-            className="hover:scale-110 transition-all"
+            className="hover:-translate-y-1.5 hover:text-blue-400   transition-all"
           >
             Blogs
           </li>
@@ -84,7 +84,7 @@ const Navbar = () => {
               navigate("/save");
               setOpen(false);
             }}
-            className="hover:scale-110 transition-all"
+            className="hover:-translate-y-1.5 hover:text-blue-400 transition-all"
           >
             Favorite
           </li>
@@ -93,7 +93,7 @@ const Navbar = () => {
               navigate("/post");
               setOpen(false);
             }}
-            className="hover:scale-110 transition-all"
+            className="hover:-translate-y-1.5  hover:text-blue-400  transition-all"
           >
             action
           </li>
