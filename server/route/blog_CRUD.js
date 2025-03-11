@@ -66,7 +66,7 @@ router.post("/",upload.single("image") ,  async (req, res) => {
 
     res.json({
       success: true,
-      message: "blog recorded",
+      message: "blog created",
       data: newPost,
     });
   } catch (error) {
@@ -75,14 +75,12 @@ router.post("/",upload.single("image") ,  async (req, res) => {
   }
 });
 
-router.put("/:id",upload.any(), async (req, res) => {
+router.put("/:id", async (req, res) => {
   const file = req.file
     if (!file) {
       return res.status(400).json({ success: false, message: "Image is required" });
     }
 
-    // Construct image URL
-    const imageUrl = `uploads/${file.filename}`;
   const { id } = req.params;
  const {user_id,username,title,description, content } = req.body;
 
@@ -95,7 +93,7 @@ router.put("/:id",upload.any(), async (req, res) => {
     if (title !== undefined) updateField.title = title;
     if (description !== undefined) updateField.description = description;
     if (content !== undefined) updateField.content = content;
-    if (imageUrl !== undefined) updateField.imageUrl = imageUrl;
+    
     // Check if there are fields to update
     console.log(updateField)
     if (Object.keys(updateField).length === 0) {

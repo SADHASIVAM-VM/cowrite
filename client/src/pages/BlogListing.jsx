@@ -91,7 +91,7 @@ const BlogListing = () => {
                 <option value="" selected >
                   Topics
                 </option>
-                <option value="ai" s>AI</option>
+                <option value="ai" >AI</option>
                 <option value="fashion">Fashion</option>
                 <option value="money">Money</option>
                 <option value="technical">Technical</option>

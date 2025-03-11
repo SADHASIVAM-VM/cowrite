@@ -90,13 +90,12 @@ background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox=
 
 .herosvg{
   background: url('https://cdn.svgator.com/images/2023/03/animated-geometric-shapes-background.svg') no-repeat center;
-  border-radius: 10px;
   background-size: cover;
   height: 650px;
   width: 100%;
 }
 .black{
-  border-radius: 20px;
+
   width: 100%;
   height: 100%;
   background: #000000ab;

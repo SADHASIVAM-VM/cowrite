@@ -7,7 +7,6 @@ import { ThemeProvider } from './components/Themeproviders'
 import SingleBlog from './pages/SingleBlog'
 import './App.css'
 
-import Signin from './components/Signin'
 import { Toaster } from 'react-hot-toast'
 import { useMyContext } from './config/CommonContext'
 import Myblogs from './components/myblogs'
@@ -15,12 +14,10 @@ import Save from './pages/Save'
 import NotFound from './pages/Notfound'
 import PrivateRoute from './Route/privateRoute'
 
-import { ClerkProvider, RedirectToSignIn  } from '@clerk/clerk-react'
+import { RedirectToSignIn  } from '@clerk/clerk-react'
 
 const App = () => {
 const {theme} = useMyContext();
-console.log(theme)
-
   return (
     <ThemeProvider defaultTheme='light'>
       <Toaster/>
@@ -39,7 +36,7 @@ console.log(theme)
           <Route path='/post' element={<PrivateRoute><PostArea/></PrivateRoute>}/>
           <Route path='/save' element={<PrivateRoute><Save/></PrivateRoute>}/>
          
-        
+          <Route path='*' element={<NotFound/>}/>
           
 
         </Routes>
