@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from "../components/ui/carousel";
 import Navbar from "../components/Header";
+import Footer from "../components/Footer";
 
 const URLs = import.meta.env.VITE_BASEURL;
 const Home = () => {
@@ -113,7 +114,7 @@ const Home = () => {
   ];
 
   return (
-    <>
+    <div className="home" >
     <Navbar/>
       <div className="space-y-10 md:space-y-16 ">
         {/* Hero Section */}
@@ -389,7 +390,9 @@ const Home = () => {
           </div>
         </section>
       </div>
-    </>
+
+      <Footer/>
+    </div>
   );
 };
 

@@ -15,7 +15,6 @@ app.use(express.urlencoded({limit:"10mb", extended:true}))
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 db()
 
-app.use('/upload', require('./route/imageUpload'))
 app.use('/ips', require('./route/IIPsRoute'))
 app.use('/post', require('./route/blog_CRUD'))
 app.use('/reaction', require('./route/likeCmnt'))

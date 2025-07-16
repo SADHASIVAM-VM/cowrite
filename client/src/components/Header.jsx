@@ -43,7 +43,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center h-[70px] px-2 md:px-16 relative">
+    <div className="flex justify-between items-center h-[70px] px-5   relative">
       {/* Logo (Hidden in mobile when menu is open) */}
       <div className={`flex-1 ${open && isMobile ? "hidden" : "flex"}`}>
         <h1
@@ -102,7 +102,7 @@ const Navbar = () => {
 
       {/* Sign-In Button*/}
       <div
-        className={`flex-1 flex items-center justify-end gap-2 ${
+        className={`flex-1 flex items-center justify-end gap-5 ${
           open && isMobile ? "hidden" : "flex"
         }`}
       >
@@ -117,13 +117,14 @@ const Navbar = () => {
           </SignedIn>
         </button>
 
-        <button className="flex mr-3">
+{/* theme button light/dark mode */}
+        {/* <button className="flex mr-3">
           {theme == "dark" ? (
             <Sun size={20} color="yellow" onClick={() => setTheme("light")} />
           ) : (
             <Moon size={20} onClick={() => setTheme("dark")} />
           )}
-        </button>
+        </button> */}
       </div>
 
       {/* Mobile Menu */}

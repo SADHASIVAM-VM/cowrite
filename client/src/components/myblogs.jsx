@@ -31,8 +31,7 @@ const Myblogs = () => {
     <div className="grid md:grid-cols-3 gap-5">
         {
           data && data.length > 0 && data?.map((e)=> 
-          <BlogCard title={e.title} key={e._id} 
-          img={e.image} date={e.postAt} id={e._id} 
+          <BlogCard item={e}  id={e._id} 
           del={delEdit} EditContent={e}/> )
           
         }

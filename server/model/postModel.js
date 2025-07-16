@@ -7,6 +7,7 @@ const postSchema = new mongoose.Schema({
     description:String,
     content:Object,
     image:String,
+    category:String,
     postAt:{type:Date, default:Date.now}
 })
 const postmodel = mongoose.model("blogs", postSchema)

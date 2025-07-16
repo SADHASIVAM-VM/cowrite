@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import {  BrowserRouter, createBrowserRouter, Route, Router, RouterProvider, Routes } from 'react-router-dom'
+import {  BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import BlogListing from './pages/BlogListing'
 import PostArea from './pages/PostArea'
@@ -17,7 +16,7 @@ import PrivateRoute from './Route/privateRoute'
 import { RedirectToSignIn  } from '@clerk/clerk-react'
 
 const App = () => {
-const {theme} = useMyContext();
+// const {theme} = useMyContext();
   return (
     <ThemeProvider defaultTheme='light'>
       <Toaster/>
@@ -46,3 +45,5 @@ const {theme} = useMyContext();
 }
 
 export default App
+
+

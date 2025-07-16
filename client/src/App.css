@@ -11,13 +11,17 @@
 }
 *{
   box-sizing: border-box;
-  font-family: "Ubuntu", sans-serif;
+  /* font-family: "Ubuntu", sans-serif; */
  
   scroll-behavior: smooth;
 }
 .hq{
   font-family: "Bebas Neue", sans-serif;
   
+}
+.home{
+  background: #000;
+  color:white;
 }
 
 
@@ -122,3 +126,8 @@ background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox=
 .scroll_content{
   animation: scrollLoop 10s linear ;
 } */
+
+
+.btbg{
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+}

@@ -12,6 +12,7 @@ const BASE_URL = import.meta.env.VITE_BASEURL;
 
 const SingleBlog = () => {
   const { id } = useParams();
+  // console.log(id)
   const { user } = useUser(); 
   const userId = user?.id;
   const { stared, setStared } = useMyContext();
@@ -75,6 +76,7 @@ console.log(blog)
     }
   };
 
+  console.log(blog)
   // Format Date
   const formatDate =(postDate)=>{
     const date = new Date(postDate);
@@ -84,9 +86,10 @@ console.log(blog)
         year:'numeric'
     }).format(date)
   }
-  const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
+  const defaultImage = "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
   return (
-    <>
+    
+    <div className="lg:w-[60vw] mx-auto ">
     <Navbar/>
       {blog ? (
         <div className="px-4 md:px-10">
@@ -98,29 +101,34 @@ console.log(blog)
           </nav>
 
           {/* Blog Header */}
-          <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">{blog.title}</h1>
-            <button onClick={stared ? removeBlog : saveBlog} className="text-red-500">
+           <p className="text-gray-600 text-[12px] my-2">{formatDate(blog.postAt) } • 8 min read</p>
+          
+          <div className="  text-center">
+            <h1 className="lg:text-4xl text-3xl font-bold my-3 ">{blog.title}</h1>
+            {/* <button onClick={stared ? removeBlog : saveBlog} className="text-red-500">
               <Star fill={stared ? "red" : "none"} />
-            </button>
+            </button> */}
           </div>
-          <p className="text-gray-600 my-2">{formatDate(blog.postAt) } • 8 min read</p>
+         <div className="text-center">
+            <p>{blog.description}</p>
+          </div>
 
           {/* Featured Image */}
-          <div className="w-full my-6 p-5 justify-center flex  rounded-md border">
-            <img src={`${BASE_URL}/${blog.image}`} alt="Blog" className="w-[300px] h-[400px] object-contain"
+          <div className="w-full my-6 justify-center flex ">
+            {/* <img src={blog.image.includes('uploads/')? `${BASE_URL}/${blog.image}`: blog.image} loading="lazy" alt="Blog" className="w-full h-[400px] rounded-md object-center object-cover" */}
+            <img src={blog.image} loading="lazy" alt="Blog" className="w-full h-[400px] rounded-md object-center object-cover"
             onError={(e)=> e.target.src = defaultImage} />
           </div>
 
           {/* Blog Content */}
-          <div className="prose max-w-none text-opacity-75 text-[current] leading-relaxed" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          <div className="prose max-w-none text-justify text-opacity-75 text-[current] leading-relaxed" dangerouslySetInnerHTML={{ __html: blog.content }} />
 
           {/* Blog Author */}
           <div className="flex items-center gap-3 bg-gray-100 p-4 rounded-md my-6">
-            <img src="https://via.placeholder.com/50" alt="Author" className="w-12 h-12 rounded-full" />
+            
             <div>
-              <h3 className="font-semibold">{blog.author || "John Smith"}</h3>
-              <p className="text-sm text-gray-500">Senior Web Developer & Technical Writer</p>
+              <h3 className="font-semibold">Atuthor : <span className="font-semibold">{blog.username}</span></h3>
+              
             </div>
           </div>
 
@@ -132,7 +140,7 @@ console.log(blog)
           <img src={loading} alt="Loading" className="w-16" />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

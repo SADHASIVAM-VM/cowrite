@@ -27,6 +27,7 @@ function PostPanel() {
     description: "",
     content: "",
     image: null,
+    category:""
   });
 
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,7 @@ function PostPanel() {
         description: editBlog.description,
         content: editBlog.content,
         image: null,
+        category:editBlog.category
       });
       setFileName(editBlog.imageName || "");
     }
@@ -76,6 +78,7 @@ function PostPanel() {
       formData.append("title", blogData.title);
       formData.append("description", blogData.description);
       formData.append("content", JSON.stringify(blogData.content));
+      formData.append("category", JSON.stringify(blogData.category));
 
       if (blogData.image) {
         formData.append("image", blogData.image);
@@ -92,7 +95,7 @@ function PostPanel() {
       if (response.ok) {
         setLoading(false);
         toast.success(editBlog ? "Blog updated successfully" : "Blog created successfully");
-        setBlogData({ user_id: '', title: "", description: "", content: "", image: null });
+        setBlogData({ user_id: '', title: "", description: "", content: "", image: null,category:"" });
         setImgErr(null);
         setFileName("");
         setEditBlog(null);
@@ -116,6 +119,9 @@ function PostPanel() {
     <div className="p-2 relative">
       <h1 className="text-3xl hq mb-2">{editBlog ?"Update Blog":"Create A Blog"}</h1>
       <form action="" className="space-y-2" onSubmit={onsubmitting}>
+               {/* post button */}
+     <button type="submit" className="border bg-violet-700 text-white float-right  w-52 h-[50px] px-3 mb-3 rounded-md">{editBlog ? "Update" : "Post"}</button>
+        
        <div className="space-y-4 ">
        <input
           name="title"
@@ -146,16 +152,36 @@ function PostPanel() {
         <input id="img" name="image" type="file" onChange={HandleFileChange} />
         
           </div>
-        <button type="submit" className="border hover:text-yellow-400 h-[50px] px-3 rounded-md">{editBlog ? "Update" : "Post"}</button>
-        </div>
-      </form>
+          
+
+          <div className="">
+             <input
+          name="category"
+          required
+          type="text"
+          placeholder="Category"
+          value={blogData.category}
+          className="border-2 w-72 bg-transparent py-4 px-5 rounded-md"
+          onChange={changeHandle}
+       
+        />
+          </div>
+       </div>
+        
+  </form>
+
 
       {/* Quill */}
-      <div className="mt-3">
+      <div className="my-3">
       <ReactQuill className="h-[250px]" ref={quillRef} theme="snow" modules={{ toolbar: true }} value={blogData.content} onChange={handleQuillChange} />
       </div>
+ 
       {loading && <div className="loading-spinner absolute bg-black bg-opacity-70 w-full top-0 left-0 h-full z-10 flex justify-center items-center"><img src={spinners} alt="" className="w-[50px] z-10"/></div>}
+
+
     </div>
+
+   
   );
 }
 

@@ -1,4 +1,4 @@
-import {Edit, Edit2, Trash, Trash2 } from 'lucide-react'
+import {ArrowUpRightFromCircle, Edit, Edit2, Trash, Trash2, User2 } from 'lucide-react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -14,18 +14,19 @@ import {
   } from "./ui/alert-dialog"
 import toast from 'react-hot-toast'
 import { useMyContext } from '../config/CommonContext'
-  
+import temp from '../assets/homeImg/article/construction.jpg'
+import LazyImage from '../lib/LazyLoad'
 
 
 const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
 
 
-// import blog from '../assets/blogexp.webp'
-const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
+const BlogCard = ({item,id, del,EditContent,star}) => {
+  console.log(item)
     const [delEditId, setDelEditId] = useState('');
-   console.log(id)
-    const URLs = import.meta.env.VITE_BASEURL
-    //console.log(URLs)
+  
+    const BASE_URL = import.meta.env.VITE_BASEURL
+    //console.log(BASE_URL)
     const navigate = useNavigate()
     const {editBlog, setEditBlog, setMenuSwitch, setStared} = useMyContext()
     console.log(star)
@@ -43,13 +44,13 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
     // delete 
    console.log(delEditId);
     const handleDeleteBlog =async()=>{
-       const response =  await fetch(`${URLs}/post/${delEditId}`,
+       const response =  await fetch(`${BASE_URL}/post/${delEditId}`,
         {
           method:"DELETE"
         }
       )
 
-      if(response.ok){
+      if(responsitem.ok){
         toast.success("BLOG Deleted")
         window.location.reload()
       }
@@ -60,10 +61,11 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
     }
   return (
   
-        <div  >
+        <div className='flex flex-col ' >
            
-          {
-            del &&  <div className= " flex gap-3 float-end mr-5 mb-3">
+         <div className="">
+           {
+            del &&  <div className= "items-center flex gap-3 float-end mr-5">
 
                 
             <div onClick={()=> setDelEditId(id)}>
@@ -73,7 +75,7 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
 <AlertDialogHeader>
   <AlertDialogTitle > Are you sure?</AlertDialogTitle>
   <AlertDialogDescription>
-    This action cannot be undone. This will permanently delete your Blog
+    This action cannot be undonitem. This will permanently delete your Blog
     and remove your data from our servers.
   </AlertDialogDescription>
 </AlertDialogHeader>
@@ -86,20 +88,60 @@ const BlogCard = ({title, img, date, id, del,EditContent,star}) => {
             </div>
 
             <button onClick={()=>handleEditBlog(id)}><Edit color='blue' /></button>
+
         </div>
           }
+         </div>
 
-            <div className="img p-2 hover:p-1 border-2 border-[#d8d8d8] hover:border-[#84ff71f7] rounded-md w-full h-[300px]  inline-flex transition-all" onClick={()=> navigate('/blog/'+id)}>
-                    <img src={`${URLs}/`+img} alt="" className='object-fit rounded-md w-full h-full transition-all cursor-pointer' onError={(e)=> e.target.src = defaultImage}/>
+            <div className="min-h-[350px] flex flex-col gap-5 group" onClick={()=> navigate('/blog/'+item?._id)}>
+            
+            {/* img */}
+            
+            <div className="w-full relative ">
+            {/* <img src={item.image.includes('uploads/')? `${BASE_URL}/${item.image}`: item.image} alt="" className='w-full object-cover h-[250px] rounded-2xl' /> */}
+            <img src={item?.image} alt=""  className='w-full object-cover h-[250px] rounded-2xl' />
+            
+            {/* <LazyImage
+             key={item._id}
+          src={item.image}
+          alt={`Image ${item + 1}`}
+className='w-full object-cover h-[250px] rounded-2xl'
+        
+            /> */}
+            <div className="bg-black/40  duration-300 transition-all  hidden group-hover:flex w-full h-full left-0 justify-center items-center absolute top-0 rounded-2xl">
+              <span className='bg-black p-2 rounded-full animate-bounce'>
+                <ArrowUpRightFromCircle color='white' className='animate-pulse'/>
+              </span>
             </div>
-            <div className="flex space-y-1 flex-row justify-between mt-2">
-                <p className="font-bold  text-xl ">
-                    {title.length > 25 ? title.slice(0, 25)+"....":title}
-                </p>
-                <p className='opacity-70 text-sm font-mono font-bold'>🕛{date && formatDate(date)}</p>
             </div>
+            
+            {/* content */}
+            
+            <div className="w-full space-y-2">
+              <p className=' font-medium text-gray-500'>{item?.category || "General"}</p>
+            
+              <h3 className='text-xl xl:text-2xl font-bold text-blue-900'>{item?.title.length >45 ? (item?.title).slice(0,45)+'...'
+              :item?.title}
+              </h3>
+            
+              <p className='text-sm text-wrap text-gray-700'>{item?.description.length >150 ? (item?.description).slice(0,150)+'...'
+              :item?.description}</p>
+            
+              {/* author */}
+            
+              <div className='flex items-center gap-2'>
+                <User2 className='border rounded-full' size={36}/>
+                <div className="py-5">
+                  <p className="text-[12px] text-gray-500">{item?.username}</p>
+                  <p className="text-[12px] text-gray-500">{ new Date(item?.postAt).toDateString()  } </p>
+                </div>
+              </div>
+            </div>
+            
+            </div>
+            
 
-          
+     
         </div>
    
   )

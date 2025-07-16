@@ -30,10 +30,12 @@ const Comment = () => {
       fetchComments();
   }, [id]);
 
+  console.log(fetchComment)
   // Add a new comment
   const handleAddComment = async () => {
+    
       const postingData = { comment: newComment, username, blog_id: id };
-
+     
       try {
           const res = await fetch(`${URLs}/reaction/${id}`, {
               method: "POST",
@@ -44,6 +46,7 @@ const Comment = () => {
           if (res.ok) {
               const nComment = await res.json();
               setFetchComment((prev) => [...prev, nComment]);
+      
               setNewComment("");
               toast.success("Comment added successfully!");
           } else {
@@ -111,7 +114,9 @@ const Comment = () => {
       </div>
 
       {/* Render Comments */}
-      {fetchComment && fetchComment.length > 0 ? (
+
+      
+      { (fetchComment?.length || [] )> 0 ? (
         fetchComment.map((comment) => (
           <div key={comment._id} className="space-y-5 p-1 border-b">
             {/* Comment */}
@@ -184,7 +189,7 @@ const Comment = () => {
           </div>
         ))
       ) : (
-        <p className="text-sm md:text-[14px]">{fetchComment&&fetchComment.length == 0 ?"Loading comments...":"no comments yet" }</p>
+        <p className="text-sm md:text-[14px]">{fetchComment?.length == 0 ?"Loading comments...":"no comments yet" }</p>
       )}
     </div>
   );

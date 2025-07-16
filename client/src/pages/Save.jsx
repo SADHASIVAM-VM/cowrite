@@ -31,7 +31,7 @@ const Save = () => {
         <div className="grid md:grid-cols-3 gap-5 my-10">
         {data && data.length > 0 ?
           data.map((e,inx)=>
-           <BlogCard key={inx} id={e.saveBlogId._id} date={e.saveBlogId.postAt} title={e.saveBlogId.title} img={e.saveBlogId.image}  star={e.star} />
+           <BlogCard key={inx} id={e.saveBlogId.id} date={e.saveBlogId.postAt} title={e.saveBlogId.title} img={e.saveBlogId.image}  star={e.star} />
             
           )
           :

@@ -40,8 +40,8 @@ router.post("/",upload.single("image") ,  async (req, res) => {
     content: joi.string().required(),
     user_id: joi.string().required(),
     username: joi.string().required(),
-    description:joi.string().required()
-    //add category:joi.string().required()
+    description:joi.string().required(),
+    category:joi.string().required()
   });
 
   // Add the uploaded image path to the request body for validation
@@ -59,9 +59,9 @@ router.post("/",upload.single("image") ,  async (req, res) => {
     // Construct image URL
     const imageUrl = `uploads/${file.filename}`;
 
-    const {title, description, content, user_id, username} = req.body
+    const {title, description, content, user_id, username, category} = req.body
     // Create a new post
-    const newPost = new postModel({user_id, username, title, description, content, image:imageUrl});
+    const newPost = new postModel({user_id, username, title, description, content, image:imageUrl, category});
     await newPost.save();
 
     res.json({
@@ -82,7 +82,7 @@ router.put("/:id", async (req, res) => {
     }
 
   const { id } = req.params;
- const {user_id,username,title,description, content } = req.body;
+ const {user_id,username,title,description, content,category } = req.body;
 
 
   try {
@@ -93,6 +93,7 @@ router.put("/:id", async (req, res) => {
     if (title !== undefined) updateField.title = title;
     if (description !== undefined) updateField.description = description;
     if (content !== undefined) updateField.content = content;
+    if (category !== undefined) updateField.category = category;
     
     // Check if there are fields to update
     console.log(updateField)
