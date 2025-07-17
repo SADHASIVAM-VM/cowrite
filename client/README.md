@@ -57,13 +57,14 @@ npm install
 
 # Start the development server
 npm run dev
-
+```
 ### 👤 Author
 Sadhasivam
 
-GitHub: @sadhasivam-VM
+## GitHub:
+ @sadhasivam-VM[Sadhasivam VM](https://www.github.com/sadhasivam-VM/)
+## LinkedIn: 
+ @sadhasivam-VM[Sadhasivam VM](https://www.linkedin.com/in/sadhasivamvm/)
 
-LinkedIn: Sadhasivam VM
-
-###🌐 Live Demo 
-https://co-write-d288.vercel.app/
+### 🌐 Live Demo 
+ Live :  https://co-write-d288.vercel.app/
