@@ -60,7 +60,7 @@ const BlogCard = ({item,id, del,EditContent,star}) => {
     }
   return (
   
-        <div className='flex flex-col ' >
+        <div className='flex flex-col hover:cursor-pointer' >
            
          <div className="">
            {

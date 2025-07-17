@@ -133,11 +133,11 @@ export const HeroSection = () => {
         </p>
 
         <div className="flex gap-4 justify-center items-center">
-          <button className="bg-violet-500  text-white px-8 py-4 rounded-lg hover:bg-violet-400  transition-all duration-200 flex items-center gap-2 font-medium">
+          <button className="bg-violet-500  text-white px-8 py-4 rounded-lg hover:bg-violet-400  transition-all duration-200 flex items-center gap-2 font-medium" onClick={()=> navigate('/blogs')}>
             Start Reading
             <ArrowRight size={20} className="animate-pulse" />
           </button>
-          <button className="text-white px-8 py-4 rounded-lg border border-gray-200 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium">
+          <button className="text-white px-8 py-4 rounded-lg border border-gray-200 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium" onClick={()=> navigate('/blogs')}>
             Browse Topics
           </button>
         </div>
@@ -167,14 +167,14 @@ export const PopularArticles = () => (
           The Best Articles <br />
           <span className="text-gray-500">Tailored Just for You</span>
         </h2>
-        <button className="text-white flex items-center gap-2 text-xs bg-violet-400 px-3 py-2 rounded hover:bg-gray-800 text-sm">
+        <button className="text-white flex items-center gap-2 text-xs bg-violet-400 px-3 py-2 rounded hover:bg-gray-800 text-sm" onClick={()=> navigate('/blogs')}>
           View All <ChevronRightIcon size={18}/>
         </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.map((item, index) => (
-          <BlogCard key={index} item={item} />
+          <BlogCard key={index} item={item} onClick={()=> navigate('/blogs')}/>
         ))}
       </div>
     </div>
