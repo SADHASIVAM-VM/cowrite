@@ -110,7 +110,7 @@ console.log(blog)
             </button> */}
           </div>
          <div className="text-center">
-            <p>{blog.description}</p>
+            <i className="">{blog.description}</i>
           </div>
 
           {/* Featured Image */}

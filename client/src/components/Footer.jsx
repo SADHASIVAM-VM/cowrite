@@ -15,13 +15,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Section */}
           <div>
-            <h2 className="text-2xl md:text-4xl hd font-bold mb-4">
+            {/* <h2 className="text-2xl md:text-4xl hd font-bold mb-4">
               Co<span className="text-yellow-400 ">Write</span>
             </h2>
-            <p className="opacity-50">
+           */}
+               <img src="/l1.png" alt="" className="h-[80px] object-contain" />
+       <p className="opacity-50">
               CoWrite is your go-to platform for insightful blogs, fresh ideas, and expert advice.
               Stay connected to the trends that matter.
-            </p>
+            </p> 
           </div>
 
           {/* Useful Links */}

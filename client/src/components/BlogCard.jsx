@@ -14,8 +14,7 @@ import {
   } from "./ui/alert-dialog"
 import toast from 'react-hot-toast'
 import { useMyContext } from '../config/CommonContext'
-import temp from '../assets/homeImg/article/construction.jpg'
-import LazyImage from '../lib/LazyLoad'
+
 
 
 const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
@@ -118,7 +117,7 @@ className='w-full object-cover h-[250px] rounded-2xl'
             {/* content */}
             
             <div className="w-full space-y-2">
-              <p className=' font-medium text-gray-500'>{item?.category || "General"}</p>
+              <p className=' font-medium text-gray-500 capitalize'>{item?.category || "General"}</p>
             
               <h3 className='text-xl xl:text-2xl font-bold text-blue-900'>{item?.title.length >45 ? (item?.title).slice(0,45)+'...'
               :item?.title}
@@ -133,7 +132,7 @@ className='w-full object-cover h-[250px] rounded-2xl'
                 <User2 className='border rounded-full' size={36}/>
                 <div className="py-5">
                   <p className="text-[12px] text-gray-500">{item?.username}</p>
-                  <p className="text-[12px] text-gray-500">{ new Date(item?.postAt).toDateString()  } </p>
+                  <p className="text-[12px] text-gray-500">{ new Date(item?.postedAt).toDateString()  } </p>
                 </div>
               </div>
             </div>

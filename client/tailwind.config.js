@@ -4,6 +4,10 @@ export default {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+		  brand: {
+        purple: '#8B5CF6',
+        dark: '#111827',
+      },
 		animation: {
 			'infinite-scroll': 'infinite-scroll 20s linear infinite',
 		  },

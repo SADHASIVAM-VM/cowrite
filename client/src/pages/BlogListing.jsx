@@ -5,8 +5,6 @@ import loading from '../assets/loading/spinner.svg';
 import { SkeletonCard } from '../components/skeleton';
 import { Search, User2 } from 'lucide-react';
 import Navbar from '../components/Header';
-import Footer from '../components/Footer';
-import temp from '../assets/homeImg/article/productvity.jpg'
 const URLs = import.meta.env.VITE_BASEURL;
 
 const BlogListing = () => {
@@ -162,7 +160,7 @@ const BlogListing = () => {
            
             : (
             <div className="col-span-full flex justify-center items-center py-10">
-              <img src="/noresult.png" alt="No Results" className="h-32 opacity-60" />
+              <img src="/noresult.png" alt="No Results" className=" opacity-60" />
             </div>
         )
          : (
