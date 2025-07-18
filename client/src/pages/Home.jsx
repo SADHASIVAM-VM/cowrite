@@ -4,6 +4,7 @@ import { ArrowDownToDot, Asterisk, ChevronRightIcon, CloudLightningIcon, Fingerp
 import Footer from "../components/Footer";
 import { ArrowRight } from "lucide-react";
 import BlogCard from '../components/BlogCard'
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -98,6 +99,7 @@ const testimonials = [
 
 
 const Home = () => {
+
   return (
     <div className="home">
       <div className="max-w-7xl mx-auto">
@@ -120,6 +122,7 @@ export default Home;
 
 
 export const HeroSection = () => {
+  const navigate = useNavigate()
   return (
     <section className=" z-40">
       <div className="bg-gradient-to-b from-black via-purple-900 to-white py-32 relative text-center text-white">
@@ -133,11 +136,11 @@ export const HeroSection = () => {
         </p>
 
         <div className="flex gap-4 justify-center items-center">
-          <button className="bg-violet-500  text-white px-8 py-4 rounded-lg hover:bg-violet-400  transition-all duration-200 flex items-center gap-2 font-medium" onClick={()=> navigate('/blogs')}>
+          <button className="bg-violet-500 text-sm md:text-md  text-white px-8 py-4 rounded-lg hover:bg-violet-400  transition-all duration-200 flex items-center gap-2 font-medium" onClick={()=> navigate('/blogs')}>
             Start Reading
             <ArrowRight size={20} className="animate-pulse" />
           </button>
-          <button className="text-white px-8 py-4 rounded-lg border border-gray-200 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium" onClick={()=> navigate('/blogs')}>
+          <button className="text-white text-sm md:text-md  px-8 py-4 rounded-lg border border-gray-200 hover:text-black hover:bg-gray-50 transition-all duration-200 font-medium" onClick={()=> navigate('/blogs')}>
             Browse Topics
           </button>
         </div>
@@ -159,7 +162,10 @@ export const ContentSection = () => (
 
 
 
-export const PopularArticles = () => (
+export const PopularArticles = () => {
+
+  const navigate = useNavigate()
+  return(
   <section className="py-20 px-4 md:px-12 bg-gray-50">
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-12">
@@ -182,6 +188,7 @@ export const PopularArticles = () => (
 );
 
 
+}
 // export const About = () => {
 //   return (
 //     <section className="bg-white text-gray-800 py-16 px-6 md:px-12 lg:px-24">
@@ -213,8 +220,8 @@ export const AboutSection = () => (
     </div>
     <div className="md:w-1/2 space-y-6">
       <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
-        We Provide Tailored, <br />
-        <span className="text-gray-600">Innovative Solutions For Your Success.</span>
+        Your Story Deserves to Be Told, <br />
+        <span className="text-gray-600">CoWrite Makes It Easy.</span>
       </h2>
       <div className="max-w-5xl ">
        

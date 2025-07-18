@@ -52,7 +52,7 @@ const Navbar = () => {
         >
           Co<span className="text-yellow-300">Write</span>
         </h1> */}
-        <img src="/l1.png" alt="" className="w-full h-[80px] object-contain" />
+        <img src="/l1.png" alt="" className="w-full h-[80px] object-contain cursor-pointer"  onClick={() => navigate("/")} />
       </div>
 
       {/* Navigation Menu */}

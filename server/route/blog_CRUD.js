@@ -41,7 +41,8 @@ router.post("/",upload.single("image") ,  async (req, res) => {
     user_id: joi.string().required(),
     username: joi.string().required(),
     description:joi.string().required(),
-    category:joi.string().required()
+    category:joi.string().required(),
+    imageUrl:joi.string().required()
   });
 
   // Add the uploaded image path to the request body for validation
@@ -50,16 +51,22 @@ router.post("/",upload.single("image") ,  async (req, res) => {
   console.log(value)
   if (error) return res.status(400).json({ err: error.details[0].message });
 // console.log("image uploaded",req.file)
+
+// just changed the file instead getting url
   try {
-    const file = req.file
-    if (!file) {
-      return res.status(400).json({ success: false, message: "Image is required" });
-    }
+    //========================= file upload handle
+    // const file = req.file
+    // if (!file) {
+    //   return res.status(400).json({ success: false, message: "Image is required" });
+    // }
 
-    // Construct image URL
-    const imageUrl = `uploads/${file.filename}`;
+    // // Construct image URL
+    // const imageUrl = `uploads/${file.filename}`;
+//=========================== #End---
 
-    const {title, description, content, user_id, username, category} = req.body
+
+    const {title, description, content, user_id, username, category, imageUrl} = req.body
+  
     // Create a new post
     const newPost = new postModel({user_id, username, title, description, content, image:imageUrl, category});
     await newPost.save();
