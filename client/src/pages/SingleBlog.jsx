@@ -92,7 +92,7 @@ console.log(blog)
     <div className="lg:w-[60vw] mx-auto ">
     <Navbar/>
       {blog ? (
-        <div className="px-4 md:px-10">
+        <div className="px-2">
           {/* Breadcrumb Navigation */}
           <nav className="text-gray-500 text-sm mb-4">
             <a href="/" className="hover:text-black">Home</a> &gt;

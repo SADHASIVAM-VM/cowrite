@@ -68,7 +68,7 @@ router.post("/",upload.single("image") ,  async (req, res) => {
     const {title, description, content, user_id, username, category, imageUrl} = req.body
   
     // Create a new post
-    const newPost = new postModel({user_id, username, title, description, content, image:imageUrl, category});
+    const newPost = new postModel({user_id, username, title, description, content, imageUrl, category});
     await newPost.save();
 
     res.json({

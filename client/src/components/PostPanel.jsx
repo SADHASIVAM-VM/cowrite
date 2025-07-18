@@ -82,9 +82,9 @@ function PostPanel() {
       formData.append("category", blogData.category);
       formData.append("imageUrl", blogData.imageUrl);
 
-      if (blogData.image) {
-        formData.append("image", blogData.image);
-      }
+      // if (blogData.image) {
+      //   formData.append("image", blogData.image);
+      // }
 
       const endpoint = editBlog ? `${URLs}/post/${editBlog._id}` : `${URLs}/post`;
       const method = editBlog ? "PUT" : "POST";
@@ -99,8 +99,8 @@ function PostPanel() {
         toast.success(editBlog ? "Blog updated successfully" : "Blog created successfully");
        // setBlogData({ user_id: '', title: "", description: "", content: "", image: null,category:"", });
         setBlogData({ user_id: '', title: "", description: "", content: "",category:"", imageUrl:"" });
-        setImgErr(null);
-        setFileName("");
+        // setImgErr(null);
+        // setFileName("");
         setEditBlog(null);
       } else {
         setLoading(false);

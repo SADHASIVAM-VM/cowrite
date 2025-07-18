@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
     title:String,
     description:String,
     content:Object,
-    image:String,
+    imageUrl:String,
     category:String,
     postAt:{type:Date, default:Date.now}
 })

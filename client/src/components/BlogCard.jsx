@@ -132,7 +132,7 @@ className='w-full object-cover h-[250px] rounded-2xl'
                 <User2 className='border rounded-full text-black' size={36}/>
                 <div className="py-5">
                   <p className="text-[12px] text-gray-500">{item?.username || "sadhasivam"}</p>
-                  <p className="text-[12px] text-gray-500">{ new Date(item?.postedAt).toDateString()  } </p>
+                  <p className="text-[12px] text-gray-500">{ new Date(item?.postedAt || item?.postAt).toDateString()  } </p>
                 </div>
               </div>
             </div>

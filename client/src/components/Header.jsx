@@ -43,7 +43,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center h-[70px] px-5   relative">
+    <div className="flex justify-between items-center h-[70px]  relative">
       {/* Logo (Hidden in mobile when menu is open) */}
       <div className={`flex-1 ${open && isMobile ? "hidden" : "flex"}`}>
         {/* <h1
