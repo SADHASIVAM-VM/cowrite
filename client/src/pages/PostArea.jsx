@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PostPanel from '../components/PostPanel'
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
 import {
@@ -8,18 +9,25 @@ import {
   TooltipTrigger,
 } from "../components/ui/tooltip"
 
-import { ArrowUpRight, MessageCircle, PenSquareIcon, PlusCircle, Scale3D } from 'lucide-react'
+import { ArrowUpRight, LucidePanelTopClose, MessageCircle, PenSquareIcon, PlusCircle, Scale3D } from 'lucide-react'
 
 import Myblogs from '../components/myblogs'
 import { useUser } from '@clerk/clerk-react'
 import { useMyContext } from '../config/CommonContext'
+import Navbar from '../components/Header'
 
 const PostArea = () => {
    const username = useUser().user.username
   
   const {MenuSwitch, setMenuSwitch} = useMyContext();
   return (
+  <>
+  <div className="px-5">
+    <Navbar/>
+</div>
     <div className='flex flex-col md:flex-row gap-5 relative'>
+      
+
       {/* menu condition */}
       {/* <MenuIcon onclick={()=> toggle}/> */}
 
@@ -48,7 +56,7 @@ const PostArea = () => {
  
   <Tooltip>
     <TooltipTrigger>
-    <button className={`${MenuSwitch == "insight" && `border-yellow-400` } rounded-lg px-5 py-2 border`} onClick={()=> setMenuSwitch("newpost")}><Scale3D/> </button>
+    <button className={`${MenuSwitch == "insight" && `border-yellow-400` } rounded-lg px-5 py-2 border`} onClick={()=> setMenuSwitch("insight")}><Scale3D/> </button>
 
     </TooltipTrigger>
     <TooltipContent>
@@ -58,7 +66,7 @@ const PostArea = () => {
  
   <Tooltip>
     <TooltipTrigger>
-    <button className={`${MenuSwitch == "comment" && `border-yellow-400` } rounded-lg px-5 py-2 border `} onClick={()=> setMenuSwitch("newpost")}><MessageCircle/> </button>
+    <button className={`${MenuSwitch == "comment" && `border-yellow-400` } rounded-lg px-5 py-2 border `} onClick={()=> setMenuSwitch("comment")}><MessageCircle/> </button>
 
     </TooltipTrigger>
     <TooltipContent>
@@ -76,30 +84,46 @@ const PostArea = () => {
       <div className="flex gap-5 flex-col overflow-hidden">
        <button className={`${MenuSwitch == "newpost" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("newpost")}><PlusCircle />New Post</button>
        <button className={`${MenuSwitch == "myblog" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("myblog")}><PenSquareIcon/> My Blogs</button>
-       <button className={`${MenuSwitch == "insight" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("newpost")}><Scale3D/> Insights</button>
-       <button className={`${MenuSwitch == "comment" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("newpost")}><MessageCircle/> Comments</button>
+       <button className={`${MenuSwitch == "insight" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("insight")}><Scale3D/> Insights</button>
+       <button className={`${MenuSwitch == "comment" && `border-yellow-400` } rounded-lg px-5 py-2 border  flex gap-2 items-center`}  onClick={()=> setMenuSwitch("comment")}><MessageCircle/> Comments</button>
       </div>
 
 {/* profile */}
 <div className="absolute bottom-5 bg-transparent rounded-lg px-5 py-1  border flex gap-2 items-center">
 <Avatar >
 <AvatarImage src="https://github.com/shadcn.png" />
-<AvatarFallback>CN</AvatarFallback>
+<AvatarFallback>co</AvatarFallback>
 </Avatar>
 <h1 className='flex gap-3 '>{username}<ArrowUpRight/></h1>
 </div>
         
       </aside>
 
-      <div className="md:w-3/4 min-h-[70vh] overflow-scroll mb-10">
+      <div className="md:w-3/4 min-h-[70vh] px-5 overflow-scroll mb-10">
       {MenuSwitch == "newpost" && <PostPanel/>}
       {MenuSwitch == "myblog" && <Myblogs/>}
-      {MenuSwitch == "insight" && <PostPanel/>}
-      {MenuSwitch == "comment" && <Myblogs/>}
+      {MenuSwitch == "insight" && <Deop/>}
+      {MenuSwitch == "comment" && <Deop/>}
       
       </div>
     </div>
+  </>
   )
 }
 
 export default PostArea
+
+export const Deop=()=>{
+ 
+    return (
+    <section className="flex flex-col items-center justify-center min-h-[300px] bg-yellow-100 border border-yellow-300 rounded-lg p-6 text-center">
+      <LucidePanelTopClose className="text-yellow-600 text-5xl mb-4 animate-bounce" />
+      <h2 className="text-2xl font-semibold text-yellow-800 mb-2">
+        This Component is Under Construction
+      </h2>
+      <p className="text-yellow-700">
+        We’re working hard to finish this feature. Please check back soon.
+      </p>
+    </section>
+  );
+}

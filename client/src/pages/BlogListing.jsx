@@ -5,6 +5,8 @@ import loading from '../assets/loading/spinner.svg';
 import { SkeletonCard } from '../components/skeleton';
 import { Search, User2 } from 'lucide-react';
 import Navbar from '../components/Header';
+import { Skeleton } from '../components/ui/skeleton';
+import { useNavigate } from 'react-router-dom';
 const URLs = import.meta.env.VITE_BASEURL;
 
 const BlogListing = () => {
@@ -14,6 +16,7 @@ const BlogListing = () => {
   const [searchNow, setSearchNow] = useState('');
   const [topicFilter, setTopicFilter] = useState('');
   const [sortOption, setSortOption] = useState('');
+ const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -61,12 +64,12 @@ const BlogListing = () => {
     setFilteredData(updatedData);
   }, [searchNow, topicFilter, sortOption, data]);
 
+  //random heroblog 
 
-  const usMemooData = useMemo(()=>{
-    return data
+  const heroblog = useMemo(()=>{
+    // return data[Math.round(Math.random(data?.length)*data?.length)]
+    return data[11]
   })
-  console.log(usMemooData)
-
   return (
   <div className='min-h-screen bg-white space-y-6 w-full max-w-6xl mx-auto  flex flex-col justify-self-center '>
     <Navbar />
@@ -109,38 +112,53 @@ const BlogListing = () => {
       </div>
     </div>
 
-   
-{/* hero blog */}
-<div className=" flex lg:flex-row flex-col gap-7 px-2">
+ {
+  heroblog == null ?
+ <div className="flex flex-col lg:flex-row gap-6 space-y-3 p-2">
+      <Skeleton className="h-[350px] w-full md:w-[60%] rounded-xl" />
+      <div className="space-y-4">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+        <Skeleton className="h-4 w-[300px]" />
+      </div>
+    </div>
+  :
+  (
+  <>
+    {/* hero blog */}
+<div className=" flex lg:flex-row flex-col gap-7 px-2" onClick={()=> navigate('/blog/'+heroblog?._id) }>
 
 {/* img */}
 
 <div className="xl:w-1/2 w-full">
-<img src={'/bb1.jpg'} alt="" className='w-full object-cover h-[350px] rounded-2xl' />
+{/* <img src={'/bb1.jpg'} alt="" className='w-full object-cover h-[350px] rounded-2xl' /> */}
+<img src={heroblog?.image} alt="" className='w-full object-cover h-[350px] rounded-2xl' />
 </div>
 
 {/* content */}
 
 <div className="xl:w-1/2 w-full space-y-3 flex justify-between flex-col">
-  <p className='text-xl font-medium text-gray-500'>History</p>
+  <p className='text-xl font-medium text-gray-500'>{heroblog?.category || "General"}</p>
 
-  <h3 className='text-2xl xl:text-4xl font-bold text-blue-900'>Gold, Grain, and Growth: The Economic Rise of Ancient Civilizations
-  </h3>
+  <h3 className='text-2xl xl:text-4xl font-bold text-blue-900'>{heroblog?.title}</h3>
 
-  <p className='text-sm text-gray-700 text-justify'>Discover how ancient economies laid the foundation for modern trade and finance. This blog explores the rise of commerce, agriculture, and taxation in early civilizations like Mesopotamia, Egypt, and Rome — revealing how innovation and infrastructure fueled centuries of prosperity.</p>
+  <p className='text-sm text-gray-700 text-justify'>{heroblog?.description}</p>
 
   {/* author */}
 
    <div className='flex items-center gap-2'>
                 <User2 className='border rounded-full' size={36}/>
                 <div className="py-5">
-                  <p className="text-[12px] text-gray-500">sadahsivam</p>
+                  <p className="text-[12px] text-gray-500">{heroblog?.username || "sadhasivam"}</p>
                   <p className="text-[12px] text-gray-500">Apr 11, 2004</p>
                 </div>
               </div>
 </div>
 
 </div>
+</>)
+ }
+
 
 
    {/* Blog Cards Grid */}

@@ -21,7 +21,7 @@ const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/00
 
 
 const BlogCard = ({item,id, del,EditContent,star}) => {
-  console.log(item)
+ // console.log(item)
     const [delEditId, setDelEditId] = useState('');
   
     const BASE_URL = import.meta.env.VITE_BASEURL

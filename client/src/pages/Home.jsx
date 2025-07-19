@@ -128,7 +128,7 @@ export const HeroSection = () => {
       <div className="bg-gradient-to-b from-black via-purple-900 to-white py-32 relative text-center text-white">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
           Stories that
-          <span className="block text-purple-300">inspire</span>
+          <span className="block text-purple-300 animate-bounce">inspire</span>
         </h1>
         
         <p className="text-xl lg:text-2xl text-white/80 font-bold mb-12 max-w-2xl mx-auto leading-relaxed ">

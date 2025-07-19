@@ -30,7 +30,7 @@ const Footer = () => {
           <div>
             <h2 className="text-xl font-bold mb-4">Useful Links</h2>
             <ul className="space-y-2">
-              {["About Us", "Contact", "Privacy Policy", "Terms of Service"].map((link, index) => (
+              {["About", "Contact", "Privacy Policy", "Terms of Service"].map((link, index) => (
                 <li key={index}>
                   <a href={`/${link.toLowerCase().replace(/\s+/g, "")}`} className="opacity-50 text-sm hover:opacity-100 transition-colors">
                     {link}
