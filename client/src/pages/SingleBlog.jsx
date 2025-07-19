@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
 import { Star } from "lucide-react";
@@ -11,6 +11,7 @@ import Navbar from "../components/Header";
 const BASE_URL = import.meta.env.VITE_BASEURL;
 
 const SingleBlog = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   // console.log(id)
   const { user } = useUser(); 
@@ -31,6 +32,8 @@ console.log(blog)
         }
       } catch (error) {
         toast.error("Failed to fetch blog data.");
+        navigate('/*')
+      
       }
     };
     fetchBlog();
@@ -127,7 +130,7 @@ console.log(blog)
           <div className="flex items-center gap-3 bg-gray-100 p-4 rounded-md my-6">
             
             <div>
-              <h3 className="font-semibold">Atuthor : <span className="font-semibold">{blog.username}</span></h3>
+              <h3 className="font-semibold">Atuthor : <span className="font-semibold">{blog.username || "user"}</span></h3>
               
             </div>
           </div>
