@@ -22,9 +22,9 @@ const PostArea = () => {
   const {MenuSwitch, setMenuSwitch} = useMyContext();
   return (
   <>
-  <div className="px-5">
-    <Navbar/>
-</div>
+   <div className="max-w-7xl mx-auto px-5">
+       <Navbar/>
+     </div>
     <div className='flex flex-col md:flex-row gap-5 relative'>
       
 

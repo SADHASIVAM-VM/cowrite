@@ -72,8 +72,10 @@ const BlogListing = () => {
   })
   return (
   <div className='min-h-screen bg-white space-y-6 w-full max-w-6xl mx-auto  flex flex-col justify-self-center '>
-    <Navbar />
+  <div className="px-5">
+      <Navbar />
 
+  </div>
     {/* Hero Header */}
     <div className="bg-[url('/br.jpg')] bg-cover bg-no-repeat bg-bottom relative h-[150px] text-white py-5 px-4 md:rounded-3xl">
       <div className="w-full text-center">

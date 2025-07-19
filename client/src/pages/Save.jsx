@@ -22,8 +22,11 @@ const Save = () => {
   },[])
 
   return (
-    <div>
-      <Navbar/>
+    <>
+    <div className='px-5'>
+     <div className="max-w-7xl mx-auto px-5">
+       <Navbar/>
+     </div>
       <h1 className='text-3xl hq '>saved Blogs : {data && data.length}</h1>
 
       {
@@ -42,8 +45,9 @@ const Save = () => {
       </div>
       }
 
-      <Footer/>
+   
     </div>
+       <Footer/></>
   )
 }
 
