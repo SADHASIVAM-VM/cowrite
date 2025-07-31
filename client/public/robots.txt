@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://co-write-d288.vercel.app/sitemap.xml
