@@ -25,6 +25,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.460.0",
+    "motion": "^12.23.21",
     "quill": "^2.0.2",
     "quill-delta-to-html": "^0.12.1",
     "quill-image-resize-module": "^3.0.0",

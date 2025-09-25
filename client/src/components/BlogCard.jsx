@@ -14,13 +14,13 @@ import {
   } from "./ui/alert-dialog"
 import toast from 'react-hot-toast'
 import { useMyContext } from '../config/CommonContext'
-
+import { motion } from 'motion/react'
 
 
 const defaultImage = "https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg";
 
 
-const BlogCard = ({item,id, del,EditContent,star}) => {
+const BlogCard = ({key,item,id, del,EditContent,star}) => {
  // console.log(item)
     const [delEditId, setDelEditId] = useState('');
   
@@ -117,9 +117,9 @@ className='w-full object-cover h-[250px] rounded-2xl'
             {/* content */}
             
             <div className="w-full space-y-2">
-              <p className=' font-medium text-gray-500 capitalize'>{item?.category || "General"}</p>
+              <p className=' font-medium bg-black  text-[#e5ff75] inline px-2 text-xs py-1 rounded-xl capitalize'>{item?.category || "General"}</p>
             
-              <h3 className='text-xl xl:text-2xl font-bold text-blue-900'>{item?.title.length >45 ? (item?.title).slice(0,45)+'...'
+              <h3 className='text-xl xl:text-2xl font-semibold text-blue-900'>{item?.title.length >45 ? (item?.title).slice(0,45)+'...'
               :item?.title}
               </h3>
             

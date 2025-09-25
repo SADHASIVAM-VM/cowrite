@@ -133,8 +133,8 @@ const BlogListing = () => {
 {/* img */}
 
 <div className="xl:w-1/2 w-full">
-{/* <img src={'/bb1.jpg'} alt="" className='w-full object-cover h-[350px] rounded-2xl' /> */}
-<img src={heroblog?.image} alt="" className='w-full object-cover h-[350px] rounded-2xl' />
+<img src={'/bb1.jpg'} alt="" className='w-full object-cover h-[350px] rounded-2xl' />
+{/* <img src={heroblog?.image} alt="" className='w-full object-cover h-[350px] rounded-2xl' /> */}
 </div>
 
 {/* content */}

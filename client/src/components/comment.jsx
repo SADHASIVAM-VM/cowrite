@@ -1,6 +1,6 @@
 import { HeartIcon, ReplyIcon, SendHorizonal, User2 } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -8,7 +8,7 @@ const URLs = import.meta.env.VITE_BASEURL;
 
 const Comment = () => {
   const [fetchComment, setFetchComment] = useState([]);
-  const [newComment, setNewComment] = useState("");
+  const newComment= useRef()
   const [newReply, setNewReply] = useState("");
   const [isReplyBox, setIsReplyBox] = useState(null);
 
@@ -28,14 +28,14 @@ const Comment = () => {
           }
       };
       fetchComments();
-  }, [id]);
+  }, []);
 
   console.log(fetchComment)
   // Add a new comment
   const handleAddComment = async () => {
     
-      const postingData = { comment: newComment, username, blog_id: id };
-     
+      const postingData = { comment: newComment.current.value, username, blog_id: id };
+      
       try {
           const res = await fetch(`${URLs}/reaction/${id}`, {
               method: "POST",
@@ -44,10 +44,9 @@ const Comment = () => {
           });
 
           if (res.ok) {
-              const nComment = await res.json();
-              setFetchComment((prev) => [...prev, nComment]);
-      
-              setNewComment("");
+              // const nComment = await res.json();
+              setFetchComment((prev) => [...prev, postingData] || []);
+              newComment.current.value = ''
               toast.success("Comment added successfully!");
           } else {
               const errorData = await res.json();
@@ -98,11 +97,10 @@ const Comment = () => {
       {/* Add a New Comment */}
       <div className="mb-6">
         <input
+        ref={newComment}
           className="w-full  p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-black bg-transparent"
           placeholder="Write a comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        />
+         />
         <div className="flex justify-end mt-2">
           <button
             className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
