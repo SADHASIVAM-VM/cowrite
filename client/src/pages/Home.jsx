@@ -185,7 +185,7 @@ export const HeroSection = () => {
     <section  className="relative z-40 h-[90vh]">
 
 <div className="absolute top-0 lef-0 w-full h-full">
-  <img src="/herobg.jpg" alt="" className="w-full h-full object-cover object-center"/>
+  <img src="https://www.chromethemer.com/download/hd-wallpapers/dark-space-3840x2160.jpg" alt="" className="w-full h-full object-cover object-center"/>
 </div>
 
 <motion.div initial={{ opacity: 0}}
@@ -229,7 +229,7 @@ export const HeroSection = () => {
       transition={{ duration: 0.6, delay: 0.8, ease:"backInOut" }} 
       viewport={{ once: true }}   className="relative flex justify-center items-center">
           <button
-            className="bg-orange-500 text-sm md:text-md text-white px-6 py-3 rounded-lg hover:bg-orange-400 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm shadow-white"
+            className="bg-orange-500 text-sm md:text-md text-white px-6 py-3 rounded-lg hover:bg-orange-400 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm "
             onClick={() => navigate("/blogs")}
           >
             Start Reading
