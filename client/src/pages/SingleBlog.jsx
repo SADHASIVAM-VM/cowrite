@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import toast from "react-hot-toast";
-import { Star } from "lucide-react";
+import { AudioLines, LucideCircleStop, Pause, Play, Repeat2, Star } from "lucide-react";
 import CommentBox from "../components/comment";
 import loading from "../assets/loading/spinner.svg";
 import { useMyContext } from "../config/CommonContext";
 import Navbar from "../components/Header";
 
+
 const BASE_URL = import.meta.env.VITE_BASEURL;
 
 const SingleBlog = () => {
+
+
+
+
   const navigate = useNavigate()
   const { id } = useParams();
   // console.log(id)
@@ -112,8 +117,9 @@ console.log(blog)
               <Star fill={stared ? "red" : "none"} />
             </button> */}
           </div>
-         <div className="text-center">
+         <div className="text-center ">
             <i className="">{blog.description}</i>
+            
           </div>
 
           {/* Featured Image */}
@@ -125,6 +131,7 @@ console.log(blog)
 
           {/* Blog Content */}
           <div className="prose max-w-none text-justify text-opacity-75 text-[current] leading-relaxed" dangerouslySetInnerHTML={{ __html: blog.content }} />
+          <ReadAloud text={blog.content}/>
 
           {/* Blog Author */}
           <div className="flex items-center gap-3 bg-gray-100 p-4 rounded-md my-6">
@@ -148,3 +155,81 @@ console.log(blog)
 };
 
 export default SingleBlog;
+
+
+export const ReadAloud = ({ text }) => {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const utteranceRef = useRef(null);
+
+  const handlePlay = () => {
+    // If paused, just resume
+    if (isPaused) {
+      speechSynthesis.resume();
+      setIsPaused(false);
+      return;
+    }
+
+    // If already speaking, cancel current speech before restarting
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+
+    // Create new utterance
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1.0; // 0.1 to 10, normal is 1
+    utterance.pitch = 1; // 0 to 2, normal is 1
+
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setIsPaused(false);
+    };
+
+    utteranceRef.current = utterance;
+    speechSynthesis.speak(utterance);
+    setIsSpeaking(true);
+  };
+
+  const handlePause = () => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.pause();
+      setIsPaused(true);
+    }
+  };
+
+  const handleResume = () => {
+    if (isPaused) {
+      speechSynthesis.resume();
+      setIsPaused(false);
+    }
+  };
+
+  const handleStop = () => {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
+    setIsPaused(false);
+  };
+
+  return (
+    <div style={{ display: 'flex', gap: '8px' }} className="fixed left-0 bottom-3 w-full justify-center inline-flex ">
+      <div className="bg-black text-white text-sm space-x-4 p-2 rounded-xl">
+      <button onClick={handlePlay} className="bg-white rounded-full p-1 text-black">
+        
+        {isSpeaking && !isPaused ? <Repeat2 size={12}/>: <Play size={12}/>}
+      </button>
+      <button onClick={handlePause} disabled={!isSpeaking || isPaused} className="bg-white rounded-full p-1 text-black">
+        <Pause size={12}/>
+      </button>
+      <button onClick={handleResume} disabled={!isPaused} className="bg-white rounded-full p-1 text-black">
+        <AudioLines size={12}/>
+      </button>
+      <button onClick={handleStop} disabled={!isSpeaking} className="bg-red-400 rounded-full p-1 text-white">
+        <LucideCircleStop size={12}/>
+      </button>
+      </div>
+    </div>
+  );
+};
+
+

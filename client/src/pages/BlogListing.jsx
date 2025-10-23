@@ -133,7 +133,7 @@ const BlogListing = () => {
 {/* img */}
 
 <div className="xl:w-1/2 w-full">
-<img src={'/bb1.jpg'} alt="" className='w-full object-cover h-[350px] rounded-2xl' />
+<img src={'/bb1.jpg'} alt="" loading='lazy' className='w-full object-cover h-[350px] rounded-2xl' />
 {/* <img src={heroblog?.image} alt="" className='w-full object-cover h-[350px] rounded-2xl' /> */}
 </div>
 
@@ -166,8 +166,9 @@ const BlogListing = () => {
    {/* Blog Cards Grid */}
     <div className="w-full mx-auto mt-10 px-2">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data?.length > 0 ? 
+
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+       {data?.length > 0 ? 
         
           filteredData?.length > 0 ? (
             filteredData.map((e) => (
@@ -193,8 +194,8 @@ const BlogListing = () => {
             <SkeletonCard />
           </>
         ) }
-        
       </div>
+
            
     </div>
 

@@ -45,7 +45,7 @@ const Comment = () => {
 
           if (res.ok) {
               // const nComment = await res.json();
-              setFetchComment((prev) => [...prev, postingData] || []);
+              setFetchComment((prev) => [...prev, postingData]);
               newComment.current.value = ''
               toast.success("Comment added successfully!");
           } else {
