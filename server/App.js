@@ -8,7 +8,7 @@ const logger  = require("./middleware/MorganLogs");
 
 require('dotenv').config({path:path.join(__dirname,"config",".env")})
 
-app.use(cors(process.env.URLs ));
+app.use(cors(process.env.URLs));
 app.use(morgan('combined',{stream:logger}))
 app.use(express.json({limit:"50mb"}))
 app.use(express.urlencoded({limit:"10mb", extended:true}))
